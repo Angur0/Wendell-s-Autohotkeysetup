@@ -37,21 +37,24 @@ AHI.SubscribeKeyboard(keyboardId, true, KeyEvent)
 
 
 KeyEvent(code, state){
-	if (state==1) && (code==82) ; NumPad0
-	{
-		; Check if Media Share folder is already open in Explorer
-		if WinExist("ahk_class CabinetWClass", mediashareLocation)
-		{
-			; If it exists, activate it (bring to front)
-			WinActivate("ahk_class CabinetWClass", mediashareLocation)
-		}
-		else
-		{
-			; If not open, launch Explorer with the Media Share folder
-			Run("explorer.exe `"" . mediashareLocation . "`"")
-		}
-	}
-
+if (state==1) && (code==82) ; NumPad0
+    {
+        ; Check if Media Share folder is already open in Explorer
+        if WinExist("ahk_class CabinetWClass", mediashareLocation)
+        {
+            ; If it exists, activate it (bring to front)
+            WinActivate("ahk_class CabinetWClass", mediashareLocation)
+        }
+        else
+        {
+            ; If not open, launch Explorer with the Media Share folder
+            Run("explorer.exe `"" . mediashareLocation . "`"")
+            ; Wait for the window to appear (max 10 seconds)
+            WinWait("ahk_class CabinetWClass", , 10)
+            ; Activate it once it's open
+            WinActivate("ahk_class CabinetWClass")
+        }
+    }
 	if (state==1) && (code==79) ; NumPad1
 	{
 		; Check if Obsidian is already running
