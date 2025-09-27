@@ -5,17 +5,17 @@ Persistent
 ;############### LOAD CONFIGURATION ########################
 configFile := A_ScriptDir . "\config.ini"
 
-; Load app locations from config
-mediashareLocation := IniRead(configFile, "AppLocations", "mediashare", "")
-obsidianLocation := IniRead(configFile, "AppLocations", "obsidian", "")
-discordLocation := IniRead(configFile, "AppLocations", "discord", "")
-zenLocation := IniRead(configFile, "AppLocations", "zen", "")
-reaperLocation := IniRead(configFile, "AppLocations", "reaper", "")
-steamLocation := IniRead(configFile, "AppLocations", "steam", "")
-vscodeLocation := IniRead(configFile, "AppLocations", "vscode", "")
-explorerLocation := IniRead(configFile, "AppLocations", "explorer", "")
-clipstudiopaintLocation := IniRead(configFile, "AppLocations", "clipstudiopaint", "")
-davinciresolveLocation := IniRead(configFile, "AppLocations", "davinciresolve", "")
+; Load app locations from config - NumPad Key Bindings:
+mediashareLocation := IniRead(configFile, "AppLocations", "mediashare", "")      ; NumPad 0 - Media Share folder
+obsidianLocation := IniRead(configFile, "AppLocations", "obsidian", "")          ; NumPad 1 - Obsidian
+discordLocation := IniRead(configFile, "AppLocations", "discord", "")            ; NumPad 2 - Discord
+zenLocation := IniRead(configFile, "AppLocations", "zen", "")                    ; NumPad 3 - Zen Browser
+reaperLocation := IniRead(configFile, "AppLocations", "reaper", "")              ; NumPad 4 - Reaper DAW
+steamLocation := IniRead(configFile, "AppLocations", "steam", "")                ; NumPad 5 - Steam
+vscodeLocation := IniRead(configFile, "AppLocations", "vscode", "")              ; NumPad 6 - Visual Studio Code
+explorerLocation := IniRead(configFile, "AppLocations", "explorer", "")          ; NumPad 7 - File Explorer
+clipstudiopaintLocation := IniRead(configFile, "AppLocations", "clipstudiopaint", "") ; NumPad 8 - Clip Studio Paint
+davinciresolveLocation := IniRead(configFile, "AppLocations", "davinciresolve", "")   ; NumPad 9 - DaVinci Resolve
 
 ; Load app identifiers from config
 discordIdentifier := IniRead(configFile, "AppIdentifiers", "discord", "")
@@ -28,14 +28,11 @@ explorerIdentifier := IniRead(configFile, "AppIdentifiers", "explorer", "")
 clipstudiopaintIdentifier := IniRead(configFile, "AppIdentifiers", "clipstudiopaint", "")
 davinciresolveIdentifier := IniRead(configFile, "AppIdentifiers", "davinciresolve", "")
 
-; Load keyboard settings from config
-vendorId := IniRead(configFile, "KeyboardSettings", "vendorId", "0x03F0")
-productId := IniRead(configFile, "KeyboardSettings", "productId", "0x344A")
 
 ;############### INITIALIZE AUTOHOTINTERCEPTION ########################
 AHI := AutoHotInterception()
 
-keyboardId := AHI.GetKeyboardId(vendorId, productId)
+keyboardId := AHI.GetKeyboardId(0x03F0, 0x344A)
 AHI.SubscribeKeyboard(keyboardId, true, KeyEvent)
 
 
@@ -263,132 +260,5 @@ KeyEvent(code, state){
 	{
 	
 	}
+
 }
-
-
-
-
-;######## ALL KEY NUMBERS ############
-;{======= NUMPAD ID ==================
-;NumPad0 = 82
-;NumPad1 = 79
-;NumPad2 = 80
-;NumPad3 = 81
-;NumPad4 = 75
-;NumPad5 = 76
-;NumPad6 = 77
-;NumPad7 = 71
-;NumPad8 = 72
-;NumPad9 = 73
-;
-;NumLock = 325
-;Slash(/) = 309
-;Asterisk(*) = 55
-;Minus(-) = 74
-;Plus(+) = 78
-;Enter = 284
-;Dot(.)/Delete = 83
-;}
-;{======= Arrow Keys ID ==============
-;Up = 328
-;Down = 336
-;Left = 331
-;Right = 333
-;
-;}
-;{======= F Keys ID ==================
-;F1 = 59
-;F2 = 60
-;F3 = 61
-;F4 = 62
-;F5 = 63
-;F6 = 64
-;F7 = 65
-;F8 = 66
-;F9 = 67
-;F10 = 68
-;F11 = 87
-;F12 = 88
-;}
-;{======= Main Numbers Row ID ========
-;Tilde = 41
-;1 = 2
-;2 = 3
-;3 = 4
-;4 = 5
-;5 = 6
-;6 = 7
-;7 = 8
-;8 = 9
-;9 = 10
-;0 = 11
-;Dash/Minus/Underscore = 12
-;Plus/Equal Sign = 13
-;BackSlash = 43
-;BackSpace = 14
-;}
-;{======= Tab-Qwerty Row ID ==========
-;Tab = 15
-;Q = 16
-;W = 17
-;E = 18
-;R = 19
-;T = 20
-;Y = 21
-;U = 22
-;I = 23
-;O = 24
-;P = 25
-;Left Square Bracket("[") = 26
-;Right Square Bracket("]") = 27
-;}
-;{======= Caps-ASD Row ID ============
-;CapsLock = 58
-;A = 30
-;S = 31
-;D = 32
-;F = 33
-;G = 34
-;H = 35
-;J = 36
-;K = 37
-;L = 38
-;Semicolon(";") = 39
-;Apostrophe("'") = 40
-;Enter = 28
-;}
-;{======= Shift-ZXC Row ID ===========
-;Left Shift = 42
-;Z = 44
-;X = 45
-;C = 46
-;V = 47
-;B = 48
-;N = 49
-;M = 50
-;Comma(",") = 51
-;Dot(".") =  52
-;Slash(/) = 53
-;Right Shift = 310
-;}
-;{======= Gtrl/Spacebar Row ID =======
-;Left Ctrl = 29
-;Windows Button = 347
-;Left Alt = 56
-;Spacebar = 57
-;Right Alt = 312
-;***Left Windows Button = 348
-;***Mistery Key With some list menu and mouse cursor = 349
-;Right Ctrl = 285
-;}
-;{======= Print Screen Buttons =======
-;PrtSc = 311
-;ScrLk = 70
-;Pause = 325
-;Insert = 338
-;Home = 327
-;Page Up = 329
-;Delete = 339
-;End = 335
-;Page Down  = 337
-;}z
