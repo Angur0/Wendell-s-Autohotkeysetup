@@ -40,13 +40,29 @@ KeyEvent(code, state){
 if (state==1) && (code==82) ; NumPad0
     {
         ; Check if Media Share folder is already open in Explorer
-        if WinExist("ahk_class CabinetWClass", mediashareLocation)
+        ; Look for any Explorer window with the Media Share folder path in the address bar
+        found := false
+        for window in WinGetList("ahk_class CabinetWClass")
         {
-            ; If it exists, activate it (bring to front)
-            WinActivate("ahk_class CabinetWClass", mediashareLocation)
+            try {
+                ; Get the window's current folder path
+                xl := ComObject("Shell.Application")
+                for item in xl.Windows {
+                    if (item.HWND == window) {
+                        currentPath := item.Document.Folder.Self.Path
+                        if (currentPath == mediashareLocation) {
+                            WinActivate("ahk_id " . window)
+                            found := true
+                            break
+                        }
+                    }
+                }
+            }
+            if (found)
+                break
         }
-        else
-        {
+        
+        if (!found) {
             ; If not open, launch Explorer with the Media Share folder
             Run("explorer.exe `"" . mediashareLocation . "`"")
             ; Wait for the window to appear (max 10 seconds)
