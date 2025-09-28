@@ -48,6 +48,10 @@ if (keyboardId == 0) {
 ;############### KEY EVENT HANDLER ########################
 KeyEvent(code, state){
 
+	   if (state==1) && (code==1) ; ESC
+    {
+        Reload()
+    }
 if (state==1) && (code==82) ; NumPad0
     {
         ; Check if Media Share folder is already open in Explorer
