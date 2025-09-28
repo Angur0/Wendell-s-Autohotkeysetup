@@ -33,14 +33,13 @@ The scripts are written for **AutoHotkey v2**.
 ## Setup Instructions
 
 1.  **Install the Interception Driver:**
-    - Navigate to the `Interception/command line installer/` directory.
+    - Navigate to the `Interception/command line installer/` directory(open/run using commandline won't work otherwise).
     - Run `install-interception.exe`.
     - You may need to restart your computer after installation.
 
 2.  **Find Your Keyboard's Vendor and Product ID:**
-    - The script needs to know which keyboard to listen to. You can find the Vendor ID (VID) and Product ID (PID) for your second keyboard using Device Manager in Windows.
-    - Look for your keyboard under "Keyboards", go to its properties, then "Details", and select "Hardware Ids" from the dropdown. You will see something like `HID\VID_04F2&PID_0112`. In this case, the VID is `04F2` and the PID is `0112`.
-
+    - The script needs to know which keyboard to listen to. You can find the Vendor ID (VID) and Product ID (PID) for your second keyboard using Monitor.ahk.
+    
 3.  **Configure `config.ini`:**
     - Open `Scripts/config.ini` in a text editor.
     - Under `[KeyboardSettings]`, replace the `vendorId` and `productId` with the ones you found in the previous step.
