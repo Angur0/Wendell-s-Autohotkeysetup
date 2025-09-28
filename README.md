@@ -49,6 +49,35 @@ The scripts are written for **AutoHotkey v2**.
 4.  **Run the Script:**
     - Double-click `Scripts/Secondkeyboard.ahk` to run it. Your second keyboard should now trigger the custom hotkeys.
 
+## Current Keybinds
+
+Here are the current keybinds configured in the `Secondkeyboard.ahk` script:
+
+### NumPad Application Launchers/Switchers
+- **NumPad 0**: Media Share folder (opens/activates Explorer window)
+- **NumPad 1**: Obsidian (launches/activates)
+- **NumPad 2**: Discord (launches/activates)
+- **NumPad 3**: Zen Browser (launches/activates)
+- **NumPad 4**: Reaper DAW (launches/activates)
+- **NumPad 5**: Steam (launches/activates)
+- **NumPad 6**: Visual Studio Code (launches/activates)
+- **NumPad 7**: File Explorer (launches/activates)
+- **NumPad 8**: Clip Studio Paint (launches/activates)
+- **NumPad 9**: DaVinci Resolve (launches/activates)
+
+### System Controls
+- **NumPad +**: Take screenshot (Print Screen)
+- **NumPad -**: Minimize active window
+- **NumPad ***: Minimize all windows
+- **NumPad Enter**: Mouse back button (XButton1)
+- **NumPad Delete**: OBS Studio (launches/activates)
+
+### Quick Web Navigation
+- **NumLock**: Open/navigate to YouTube in Zen Browser
+- **NumPad /**: Open/navigate to Facebook in Zen Browser
+
+*Note: All application launchers will switch to the app if it's already running, or launch it if it's not.*
+
 ## Customization
 
 You can change the hotkeys and their actions by editing `Secondkeyboard.ahk`. The `Cheatsheet.ahk` file provides the necessary key codes to assign new actions to different keys on your second keyboard.
