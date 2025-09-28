@@ -47,7 +47,6 @@ if (keyboardId == 0) {
     MsgBox("Keyboard not found! Check vendor/product IDs")
 }
 
-
 ;############### KEY EVENT HANDLER ########################
 KeyEvent(code, state){
 
@@ -260,7 +259,8 @@ KeyEvent(code, state){
 
 	if (state==1) && (code==78) ; NumPad Plus (+)
 	{
-		 
+		; Take a screenshot using Print Screen
+		Send("{PrintScreen}")
 	}
 
 	if (state==1) && (code==74) ; NumPad Minus (-)
@@ -353,3 +353,4 @@ KeyEvent(code, state){
     }
 
 }
+
