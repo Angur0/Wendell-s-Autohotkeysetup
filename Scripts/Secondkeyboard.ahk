@@ -5,6 +5,9 @@ Persistent
 ;############### LOAD CONFIGURATION ########################
 configFile := A_ScriptDir . "\config.ini"
 
+;############### TOGGLE SYSTEM ########################
+
+
 ; Load app locations from config - NumPad Key Bindings:
 mediashareLocation := IniRead(configFile, "AppLocations", "mediashare", "")      ; NumPad 0 - Media Share folder
 obsidianLocation := IniRead(configFile, "AppLocations", "obsidian", "")          ; NumPad 1 - Obsidian
@@ -16,7 +19,7 @@ vscodeLocation := IniRead(configFile, "AppLocations", "vscode", "")             
 explorerLocation := IniRead(configFile, "AppLocations", "explorer", "")          ; NumPad 7 - File Explorer
 clipstudiopaintLocation := IniRead(configFile, "AppLocations", "clipstudiopaint", "") ; NumPad 8 - Clip Studio Paint
 davinciresolveLocation := IniRead(configFile, "AppLocations", "davinciresolve", "")   ; NumPad 9 - DaVinci Resolve
-
+obsLocation := IniRead(configFile, "AppLocations", "obs", "")                    ; ./delete - OBS Studio
 ; Load app identifiers from config
 discordIdentifier := IniRead(configFile, "AppIdentifiers", "discord", "")
 obsidianIdentifier := IniRead(configFile, "AppIdentifiers", "obsidian", "")
@@ -27,7 +30,7 @@ vscodeIdentifier := IniRead(configFile, "AppIdentifiers", "vscode", "")
 explorerIdentifier := IniRead(configFile, "AppIdentifiers", "explorer", "")
 clipstudiopaintIdentifier := IniRead(configFile, "AppIdentifiers", "clipstudiopaint", "")
 davinciresolveIdentifier := IniRead(configFile, "AppIdentifiers", "davinciresolve", "")
-
+obsIdentifier := IniRead(configFile, "AppIdentifiers", "obs", "")
 ; Load keyboard settings from config
 vendorId := IniRead(configFile, "KeyboardSettings", "vendorId",)
 productId := IniRead(configFile, "KeyboardSettings", "productId",)
@@ -49,11 +52,7 @@ if (keyboardId == 0) {
 ;############### KEY EVENT HANDLER ########################
 KeyEvent(code, state){
 
-	   if (state==1) && (code==1) ; ESC
-    {
-        Reload()
-    }
-if (state==1) && (code==82) ; NumPad0
+    if (state==1) && (code==82) ; NumPad0
     {
         ; Check if Media Share folder is already open in Explorer
         ; Look for any Explorer window with the Media Share folder path in the address bar
@@ -87,6 +86,7 @@ if (state==1) && (code==82) ; NumPad0
             WinActivate("ahk_class CabinetWClass")
         }
     }
+
 	if (state==1) && (code==79) ; NumPad1
 	{
 		; Check if Obsidian is already running
@@ -281,31 +281,35 @@ if (state==1) && (code==82) ; NumPad0
 
 	if (state==1) && (code==83) ; NumPad Delete
 	{
+			if WinExist(obsIdentifier)
+		{
+			; If it exists, activate it (bring to front)
+			WinActivate(obsIdentifier)
+		}
+		else
+		{
+			; If not running, launch it and wait for it to open
+			Run(obsLocation)
+			; Wait for the window to appear (max 15 seconds - DaVinci takes longer to load)
+			WinWait(obsIdentifier, , 15)
+			; Activate it once it's open
+			WinActivate(obsIdentifier)
+		}
 	}
 
 
-	; F-Key shortcuts
-	if (state==1) && (code==59) ; F1
-	{
-	
-	}
-
-	if (state==1) && (code==60) ; F2
-	{
-	
-	}
-
-	if (state==1) && (code==61) ; F3
-	{
-
-	}
-
-	if (state==1) && (code==62) ; F4
-	{
-	
-	}
-	
+;F-Key shortcuts
 
 	
+    if (state==1) && (code==62) ; F4 - Toggle all app launching on/off
+    {
+    
+}
+
+; F2 
+if (state==1) && (code==60) ; F2
+{
+
+}
 
 }
