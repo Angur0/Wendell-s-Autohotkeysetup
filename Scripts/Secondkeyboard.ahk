@@ -28,15 +28,26 @@ explorerIdentifier := IniRead(configFile, "AppIdentifiers", "explorer", "")
 clipstudiopaintIdentifier := IniRead(configFile, "AppIdentifiers", "clipstudiopaint", "")
 davinciresolveIdentifier := IniRead(configFile, "AppIdentifiers", "davinciresolve", "")
 
+; Load keyboard settings from config
+vendorId := IniRead(configFile, "KeyboardSettings", "vendorId",)
+productId := IniRead(configFile, "KeyboardSettings", "productId",)
 
+; Convert hex string values to 16-bit integers
+vendorIdInt := Integer(vendorId) & 0xFFFF
+productIdInt := Integer(productId) & 0xFFFF
 ;############### INITIALIZE AUTOHOTINTERCEPTION ########################
 AHI := AutoHotInterception()
-
-keyboardId := AHI.GetKeyboardId(0x03F0, 0x344A)
+keyboardId := AHI.GetKeyboardId(vendorIdInt, productIdInt)
 AHI.SubscribeKeyboard(keyboardId, true, KeyEvent)
 
+if (keyboardId == 0) {
+    MsgBox("Keyboard not found! Check vendor/product IDs")
+}
 
+
+;############### KEY EVENT HANDLER ########################
 KeyEvent(code, state){
+
 if (state==1) && (code==82) ; NumPad0
     {
         ; Check if Media Share folder is already open in Explorer
@@ -267,6 +278,7 @@ if (state==1) && (code==82) ; NumPad0
 	{
 	}
 
+
 	; F-Key shortcuts
 	if (state==1) && (code==59) ; F1
 	{
@@ -287,5 +299,8 @@ if (state==1) && (code==82) ; NumPad0
 	{
 	
 	}
+	
+
+	
 
 }
