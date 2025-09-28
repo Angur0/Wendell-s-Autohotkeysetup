@@ -297,21 +297,6 @@ KeyEvent(code, state){
 		}
 	}
 
-
-;F-Key shortcuts
-
-	
-    if (state==1) && (code==62) ; F4 - Toggle all app launching on/off
-    {
-    
-}
-
-; F2 
-if (state==1) && (code==60) ; F2
-{
-
-}
-
 	if (state==1) && (code==325) ; NumLock
     {
         ; Check if Zen is already running
@@ -336,6 +321,34 @@ if (state==1) && (code==60) ; F2
             Send("^l") ; Focus address bar (Ctrl+L)
             Sleep(200)
             Send("youtube.com{Enter}") ; Navigate to YouTube
+        }
+    }
+
+	
+	if (state==1) && (code==309) ; Numpad /
+    {
+        ; Check if Zen is already running
+        if WinExist(zenIdentifier)
+        {
+            ; If Zen exists, activate it and open facebook
+            WinActivate(zenIdentifier)
+            Sleep(500) ; Wait for window to be active
+            Send("^t") ; Open new tab (Ctrl+T)
+            Sleep(200)
+            Send("facebook.com{Enter}") ; Navigate to facebook
+        }
+        else
+        {
+            ; If not running, launch Zen and then open facebook
+            Run(zenLocation)
+            ; Wait for the window to appear (max 10 seconds)
+            WinWait(zenIdentifier, , 10)
+            ; Activate it once it's open
+            WinActivate(zenIdentifier)
+            Sleep(2000) ; Wait for Zen to fully load
+            Send("^l") ; Focus address bar (Ctrl+L)
+            Sleep(200)
+            Send("facebook.com{Enter}") ; Navigate to facebook
         }
     }
 
