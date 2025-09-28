@@ -47,6 +47,22 @@ if (keyboardId == 0) {
     MsgBox("Keyboard not found! Check vendor/product IDs")
 }
 
+; Function to reinitialize keyboard subscription if it gets disrupted
+ReinitializeKeyboard() {
+    global AHI, keyboardId, vendorIdInt, productIdInt
+    try {
+        AHI.UnsubscribeKeyboard(keyboardId)
+        keyboardId := AHI.GetKeyboardId(vendorIdInt, productIdInt)
+        AHI.SubscribeKeyboard(keyboardId, true, KeyEvent)
+    } catch Error as e {
+        ; If reinitialize fails, reload the entire script
+        Reload
+    }
+}
+
+; Emergency reload hotkey (Ctrl+Shift+R on main keyboard)
+^+r::Reload
+
 ;############### KEY EVENT HANDLER ########################
 KeyEvent(code, state){
 
@@ -167,16 +183,33 @@ KeyEvent(code, state){
 		if WinExist(steamIdentifier)
 		{
 			; If it exists, activate it (bring to front)
-			WinActivate(steamIdentifier)
+			try {
+				WinActivate(steamIdentifier)
+				; Brief delay to allow window activation
+				Sleep(100)
+				; Reinitialize keyboard subscription after Steam activation
+				; (Steam sometimes interferes with keyboard hooks)
+				ReinitializeKeyboard()
+			} catch Error as e {
+				; If activation fails, continue without breaking the script
+			}
 		}
 		else
 		{
 			; If not running, launch it and wait for it to open
-			Run(steamLocation)
-			; Wait for the window to appear (max 10 seconds)
-			WinWait(steamIdentifier, , 10)
-			; Activate it once it's open
-			WinActivate(steamIdentifier)
+			try {
+				Run(steamLocation)
+				; Wait for the window to appear (max 20 seconds - Steam takes longer to load)
+				if WinWait(steamIdentifier, , 20) {
+					; Activate it once it's open
+					WinActivate(steamIdentifier)
+					Sleep(100)
+					; Reinitialize keyboard subscription after Steam launch
+					ReinitializeKeyboard()
+				}
+			} catch Error as e {
+				; If launch fails, continue without breaking the script
+			}
 		}
 	}
 
