@@ -72,6 +72,11 @@ Here are the current keybinds configured in the `Secondkeyboard.ahk` script:
 - **NumPad Enter**: Mouse back button (XButton1)
 - **NumPad Delete**: OBS Studio (launches/activates)
 
+### Discord Controls
+- **Print Screen**: Toggle mute (Ctrl+Shift+M)
+- **Scroll Lock**: Toggle deafen (Ctrl+Shift+D)
+- **Pause**: Disconnect from call (Alt+Shift)
+
 ### Quick Web Navigation
 - **NumLock**: Open/navigate to YouTube in Zen Browser
 - **NumPad /**: Open/navigate to Facebook in Zen Browser

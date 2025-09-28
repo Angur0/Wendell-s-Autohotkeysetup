@@ -257,7 +257,32 @@ KeyEvent(code, state){
 	}
 
 
-	if (state==1) && (code==78) ; NumPad Plus (+)
+	if (state==1) && (code==311) ; Printscreen
+	{
+		; Then send the mute toggle shortcut
+		Send("^+m") ; Ctrl+Shift+M to toggle mute
+	
+		; Close the overlay by sending the toggle shortcut again
+	
+	}
+
+		if (state==1) && (code==70) ; Scroll Lock
+	{
+		; Open Discord overlay and deafen
+		; First send the Discord overlay toggle shortcut (default is Shift+`)
+		
+
+		; Then send the deafen toggle shortcut
+		Send("^+d") ; Ctrl+Shift+D to toggle deafen
+		; Close the overlay by sending the toggle shortcut again
+	}
+
+			if (state==1) && (code==69) ; pause
+	{
+		; Send Alt+Shift to disconnect from Discord call
+		Send("!+") ; Alt+Shift combination
+	}
+		if (state==1) && (code==78) ; NumPad Plus (+)
 	{
 		; Take a screenshot using Print Screen
 		Send("{PrintScreen}")
