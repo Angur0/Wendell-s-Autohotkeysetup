@@ -1,12 +1,10 @@
 ﻿#SingleInstance force
 Persistent
+
 #include "A:\autohotkey\AHK v2\Lib\AutoHotInterception.ahk"
 
 ;############### LOAD CONFIGURATION ########################
 configFile := A_ScriptDir . "\config.ini"
-
-;############### TOGGLE SYSTEM ########################
-
 
 ; Load app locations from config - NumPad Key Bindings:
 mediashareLocation := IniRead(configFile, "AppLocations", "mediashare", "")      ; NumPad 0 - Media Share folder
@@ -20,6 +18,7 @@ explorerLocation := IniRead(configFile, "AppLocations", "explorer", "")         
 clipstudiopaintLocation := IniRead(configFile, "AppLocations", "clipstudiopaint", "") ; NumPad 8 - Clip Studio Paint
 davinciresolveLocation := IniRead(configFile, "AppLocations", "davinciresolve", "")   ; NumPad 9 - DaVinci Resolve
 obsLocation := IniRead(configFile, "AppLocations", "obs", "")                    ; ./delete - OBS Studio
+
 ; Load app identifiers from config
 discordIdentifier := IniRead(configFile, "AppIdentifiers", "discord", "")
 obsidianIdentifier := IniRead(configFile, "AppIdentifiers", "obsidian", "")
@@ -261,22 +260,23 @@ KeyEvent(code, state){
 
 	if (state==1) && (code==78) ; NumPad Plus (+)
 	{
-		
+		 
 	}
 
 	if (state==1) && (code==74) ; NumPad Minus (-)
 	{
-	
+		activeWindow := WinGetID("A")
+    	WinMinimize("ahk_id " . activeWindow)
 	}
 
 	if (state==1) && (code==55) ; NumPad Asterisk (*)
 	{
-		
+	  WinMinimizeAll()
 	}
 
 	if (state==1) && (code==284) ; NumPad Enter
 	{
-	
+	  Click("XButton1")
 	}
 
 	if (state==1) && (code==83) ; NumPad Delete
@@ -311,5 +311,32 @@ if (state==1) && (code==60) ; F2
 {
 
 }
+
+	if (state==1) && (code==325) ; NumLock
+    {
+        ; Check if Zen is already running
+        if WinExist(zenIdentifier)
+        {
+            ; If Zen exists, activate it and open YouTube
+            WinActivate(zenIdentifier)
+            Sleep(500) ; Wait for window to be active
+            Send("^t") ; Open new tab (Ctrl+T)
+            Sleep(200)
+            Send("youtube.com{Enter}") ; Navigate to YouTube
+        }
+        else
+        {
+            ; If not running, launch Zen and then open YouTube
+            Run(zenLocation)
+            ; Wait for the window to appear (max 10 seconds)
+            WinWait(zenIdentifier, , 10)
+            ; Activate it once it's open
+            WinActivate(zenIdentifier)
+            Sleep(2000) ; Wait for Zen to fully load
+            Send("^l") ; Focus address bar (Ctrl+L)
+            Sleep(200)
+            Send("youtube.com{Enter}") ; Navigate to YouTube
+        }
+    }
 
 }
