@@ -35,6 +35,7 @@ productId := IniRead(configFile, "KeyboardSettings", "productId",)
 ; Convert hex string values to 16-bit integers
 vendorIdInt := Integer(vendorId) & 0xFFFF
 productIdInt := Integer(productId) & 0xFFFF
+
 ;############### INITIALIZE AUTOHOTINTERCEPTION ########################
 AHI := AutoHotInterception()
 keyboardId := AHI.GetKeyboardId(vendorIdInt, productIdInt)
@@ -275,7 +276,7 @@ if (state==1) && (code==82) ; NumPad0
 
 	if (state==1) && (code==284) ; NumPad Enter
 	{
-		WinMinimizeAll()
+	
 	}
 
 	if (state==1) && (code==83) ; NumPad Delete
