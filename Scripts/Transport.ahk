@@ -3,6 +3,8 @@
 ; Implements transport controls based on low-level key codes from AutoHotInterception.
 ; Uses the base mappings provided by the user request.
 
+#include "codetokey.ahk"
+
 ; Returns: false (no reinit required). Kept for symmetry with Numpad handler.
 HandleTransportKey(code, state) {
     ; Only act on key down (state == 1) – Main.ahk already filters, but keep it safe here.
@@ -11,14 +13,14 @@ HandleTransportKey(code, state) {
     }
 
     ; PrintScreen -> Send Ctrl+Shift+| (mute toggle)
-    if (code == 311) {
+    if (CodeToKey(code) == "PrtSc") {
         ; Then send the mute toggle shortcut
         Send("^+|") ; Ctrl+Shift+M to toggle mute (per provided base)
         return false
     }
 
     ; Scroll Lock -> Send Ctrl+Shift+> (deafen toggle)
-    if (code == 70) {
+    if (CodeToKey(code) == "ScrLk") {
         ; Then send the deafen toggle shortcut
         Send("^+>")
         ; Close the overlay by sending the toggle shortcut again (left as-is per base)
@@ -26,7 +28,7 @@ HandleTransportKey(code, state) {
     }
 
     ; Pause/Break -> Send Ctrl+Shift+L (disconnect)
-    if (code == 69) {
+    if (CodeToKey(code) == "Pause") {
         ; Send Ctrl+Alt+Shift+L to disconnect from Discord call (per base comment)
         Send("^+l") ; Using the provided base (Ctrl+Shift+L)
         return false

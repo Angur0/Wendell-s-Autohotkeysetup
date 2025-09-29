@@ -2,6 +2,8 @@
 ; This script provides functions for numpad key handling
 ; Called by Main.ahk - no direct keyboard subscription
 
+#include "codetokey.ahk"
+
 ;############### NUMPAD KEY HANDLER ########################
 ; Main function called by Main.ahk for numpad key events
 HandleNumpadKey(code, state) {
@@ -80,7 +82,7 @@ HandleNumpadKey(code, state) {
         }
     }
 
-	if (state==1) && (code==79) ; NumPad1
+	if (state==1) && (CodeToKey(code) == "NumPad1")
 	{
 		; Check if Obsidian is already running
 		if WinExist(obsidianIdentifier)
@@ -99,7 +101,7 @@ HandleNumpadKey(code, state) {
 		}
 	}
 
-	if (state==1) && (code==80) ; NumPad2
+	if (state==1) && (CodeToKey(code) == "NumPad2")
 	{
   		; Check if Discord is already running
 		if WinExist(discordIdentifier)
@@ -118,7 +120,7 @@ HandleNumpadKey(code, state) {
 		}
 	}
 
-	if (state==1) && (code==81) ; NumPad3
+	if (state==1) && (CodeToKey(code) == "NumPad3")
 	{
 		; Check if Zen is already running
 		if WinExist(zenIdentifier)
@@ -137,7 +139,7 @@ HandleNumpadKey(code, state) {
 		}
 	}
 
-	if (state==1) && (code==75) ; NumPad4
+	if (state==1) && (CodeToKey(code) == "NumPad4")
 	{
 		; Check if Reaper is already running
 		if WinExist(reaperIdentifier)
@@ -156,7 +158,7 @@ HandleNumpadKey(code, state) {
 		}
 	}
 
-	if (state==1) && (code==76) ; NumPad5
+	if (state==1) && (CodeToKey(code) == "NumPad5")
 	{
 		; Check if Steam is already running
 		if WinExist(steamIdentifier)

@@ -5,6 +5,7 @@ Persistent
 ; Uses the same keyboard as defined in the config
 
 #include "A:\autohotkey\AHK v2\Lib\AutoHotInterception.ahk"
+#include "codetokey.ahk"
 #include "Numpad.ahk"
 #include "Transport.ahk"
 
@@ -33,6 +34,7 @@ if (keyboardId == 0) {
 ; Function states
 numpadEnabled := true
 transportEnabled := true
+debugKeysEnabled := false  ; Debug key names display toggle
 
 ; Function to reinitialize keyboard subscription if it gets disrupted
 ReinitializeKeyboard() {
@@ -41,11 +43,13 @@ ReinitializeKeyboard() {
         AHI.UnsubscribeKeyboard(keyboardId)
         keyboardId := AHI.GetKeyboardId(vendorIdInt, productIdInt)
         AHI.SubscribeKeyboard(keyboardId, true, KeyEvent)
-        ToolTip("Keyboard Reinitialized", 10, 70)
+        MouseGetPos(&mouseX, &mouseY)
+        ToolTip("Keyboard Reinitialized", mouseX + 10, mouseY + 10)
         SetTimer(() => ToolTip(), -1000)
     } catch Error as e {
         ; If reinitialize fails, reload the entire script
-        ToolTip("Reinit Failed - Reloading", 10, 70)
+        MouseGetPos(&mouseX, &mouseY)
+        ToolTip("Reinit Failed - Reloading", mouseX + 10, mouseY + 10)
         SetTimer(() => ToolTip(), -1000)
         Sleep(1000)
         Reload
@@ -58,10 +62,14 @@ ReinitializeKeyboard() {
 
 ;############### KEY EVENT HANDLER ########################
 KeyEvent(code, state) {
-    global numpadEnabled, transportEnabled
-    ; Debug output - show all key presses
-    ; ToolTip("Key Code: " . code . " State: " . state, 10, 50)
-    SetTimer(() => ToolTip(), -1000)
+    global numpadEnabled, transportEnabled, debugKeysEnabled
+    
+    ; Show key names when debug mode is on
+    if (debugKeysEnabled && state == 1) {
+        MouseGetPos(&mouseX, &mouseY)
+        ToolTip("Key: " . CodeToKey(code) . " (Code: " . code . ")", mouseX + 10, mouseY + 10)
+        SetTimer(() => ToolTip(), -2000)
+    }
     
     ; Only respond to key press (state == 1)
     if (state != 1) {
@@ -70,7 +78,7 @@ KeyEvent(code, state) {
     
     ; Main script hotkeys (F1, F2, ESC, F12)
     ; F1 - Toggle Numpad functionality
-    if (code == 59) {
+    if (CodeToKey(code) == "F1") {
         numpadEnabled := !numpadEnabled
         status := numpadEnabled ? "ON" : "OFF"
         ToolTip("Numpad Functions: " . status, 10, 10)
@@ -79,16 +87,16 @@ KeyEvent(code, state) {
     }
     
     ; F2 - Toggle Transport functionality
-    else if (code == 60) {
+    else if (CodeToKey(code) == "F2") {
         transportEnabled := !transportEnabled
         status := transportEnabled ? "ON" : "OFF"
-        ToolTip("Transport Functions: " . status, 10, 30)
+        ToolTip("Transport Functions: " . status, 10, 10)
         SetTimer(() => ToolTip(), -2000)
         return
     }
     
     ; ESC - Reload this script
-    else if (code == 1) {
+    else if (CodeToKey(code) == "Esc") {
         ToolTip("Main Script: RELOADING", 10, 10)
         SetTimer(() => ToolTip(), -1000)
         Sleep(1000)
@@ -97,10 +105,15 @@ KeyEvent(code, state) {
     }
     
     ; F12 - Show status
-    else if (code == 88) {
+    else if (CodeToKey(code) == "F12") {
         numpadStatus := numpadEnabled ? "ON" : "OFF"
         transportStatus := transportEnabled ? "ON" : "OFF"
-        ToolTip("Function Status:`nNumpad: " . numpadStatus . "`nTransport: " . transportStatus, 10, 50)
+        debugStatus := debugKeysEnabled ? "ON" : "OFF"
+        MouseGetPos(&mouseX, &mouseY)
+        ToolTip("Function Status:`nNumpad: " . numpadStatus . 
+                "`nTransport: " . transportStatus . 
+                "`nKey Debug: " . debugStatus . 
+                "`nKey pressed: " . CodeToKey(code), mouseX + 10, mouseY + 10)
         SetTimer(() => ToolTip(), -5000)  ; Hide tooltip after 5 seconds
         return
     }
