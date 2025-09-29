@@ -101,7 +101,7 @@ KeyEvent(code, state) {
         numpadStatus := numpadEnabled ? "ON" : "OFF"
         transportStatus := transportEnabled ? "ON" : "OFF"
         ToolTip("Function Status:`nNumpad: " . numpadStatus . "`nTransport: " . transportStatus, 10, 50)
-        SetTimer(() => ToolTip(), -5000)  ; Hide tooltip after 3 seconds
+        SetTimer(() => ToolTip(), -5000)  ; Hide tooltip after 5 seconds
         return
     }
     
