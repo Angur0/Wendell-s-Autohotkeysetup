@@ -1,72 +1,51 @@
-﻿#SingleInstance force
-Persistent
+﻿; Numpad Functions Library
+; This script provides functions for numpad key handling
+; Called by Main.ahk - no direct keyboard subscription
 
-#include "A:\autohotkey\AHK v2\Lib\AutoHotInterception.ahk"
-
-;############### LOAD CONFIGURATION ########################
-configFile := A_ScriptDir . "\config.ini"
-
-; Load app locations from config - NumPad Key Bindings:
-mediashareLocation := IniRead(configFile, "AppLocations", "mediashare", "")      ; NumPad 0 - Media Share folder
-obsidianLocation := IniRead(configFile, "AppLocations", "obsidian", "")          ; NumPad 1 - Obsidian
-discordLocation := IniRead(configFile, "AppLocations", "discord", "")            ; NumPad 2 - Discord
-zenLocation := IniRead(configFile, "AppLocations", "zen", "")                    ; NumPad 3 - Zen Browser
-reaperLocation := IniRead(configFile, "AppLocations", "reaper", "")              ; NumPad 4 - Reaper DAW
-steamLocation := IniRead(configFile, "AppLocations", "steam", "")                ; NumPad 5 - Steam
-vscodeLocation := IniRead(configFile, "AppLocations", "vscode", "")              ; NumPad 6 - Visual Studio Code
-explorerLocation := IniRead(configFile, "AppLocations", "explorer", "")          ; NumPad 7 - File Explorer
-clipstudiopaintLocation := IniRead(configFile, "AppLocations", "clipstudiopaint", "") ; NumPad 8 - Clip Studio Paint
-davinciresolveLocation := IniRead(configFile, "AppLocations", "davinciresolve", "")   ; NumPad 9 - DaVinci Resolve
-obsLocation := IniRead(configFile, "AppLocations", "obs", "")                    ; ./delete - OBS Studio
-
-; Load app identifiers from config
-discordIdentifier := IniRead(configFile, "AppIdentifiers", "discord", "")
-obsidianIdentifier := IniRead(configFile, "AppIdentifiers", "obsidian", "")
-zenIdentifier := IniRead(configFile, "AppIdentifiers", "zen", "")
-reaperIdentifier := IniRead(configFile, "AppIdentifiers", "reaper", "")
-steamIdentifier := IniRead(configFile, "AppIdentifiers", "steam", "")
-vscodeIdentifier := IniRead(configFile, "AppIdentifiers", "vscode", "")
-explorerIdentifier := IniRead(configFile, "AppIdentifiers", "explorer", "")
-clipstudiopaintIdentifier := IniRead(configFile, "AppIdentifiers", "clipstudiopaint", "")
-davinciresolveIdentifier := IniRead(configFile, "AppIdentifiers", "davinciresolve", "")
-obsIdentifier := IniRead(configFile, "AppIdentifiers", "obs", "")
-; Load keyboard settings from config
-vendorId := IniRead(configFile, "KeyboardSettings", "vendorId",)
-productId := IniRead(configFile, "KeyboardSettings", "productId",)
-
-; Convert hex string values to 16-bit integers
-vendorIdInt := Integer(vendorId) & 0xFFFF
-productIdInt := Integer(productId) & 0xFFFF
-
-;############### INITIALIZE AUTOHOTINTERCEPTION ########################
-AHI := AutoHotInterception()
-keyboardId := AHI.GetKeyboardId(vendorIdInt, productIdInt)
-AHI.SubscribeKeyboard(keyboardId, true, KeyEvent)
-
-if (keyboardId == 0) {
-    MsgBox("Keyboard not found! Check vendor/product IDs")
-}
-
-; Function to reinitialize keyboard subscription if it gets disrupted
-ReinitializeKeyboard() {
-    global AHI, keyboardId, vendorIdInt, productIdInt
-    try {
-        AHI.UnsubscribeKeyboard(keyboardId)
-        keyboardId := AHI.GetKeyboardId(vendorIdInt, productIdInt)
-        AHI.SubscribeKeyboard(keyboardId, true, KeyEvent)
-    } catch Error as e {
-        ; If reinitialize fails, reload the entire script
-        Reload
+;############### NUMPAD KEY HANDLER ########################
+; Main function called by Main.ahk for numpad key events
+HandleNumpadKey(code, state) {
+    ; Load configuration on first call
+    static configLoaded := false
+    static mediashareLocation, obsidianLocation, discordLocation, zenLocation
+    static reaperLocation, steamLocation, vscodeLocation, explorerLocation
+    static clipstudiopaintLocation, davinciresolveLocation, obsLocation
+    static discordIdentifier, obsidianIdentifier, zenIdentifier, reaperIdentifier
+    static steamIdentifier, vscodeIdentifier, explorerIdentifier
+    static clipstudiopaintIdentifier, davinciresolveIdentifier, obsIdentifier
+    
+    if (!configLoaded) {
+        configFile := A_ScriptDir . "\config.ini"
+        
+        ; Load app locations from config - NumPad Key Bindings:
+        mediashareLocation := IniRead(configFile, "AppLocations", "mediashare", "")      ; NumPad 0 - Media Share folder
+        obsidianLocation := IniRead(configFile, "AppLocations", "obsidian", "")          ; NumPad 1 - Obsidian
+        discordLocation := IniRead(configFile, "AppLocations", "discord", "")            ; NumPad 2 - Discord
+        zenLocation := IniRead(configFile, "AppLocations", "zen", "")                    ; NumPad 3 - Zen Browser
+        reaperLocation := IniRead(configFile, "AppLocations", "reaper", "")              ; NumPad 4 - Reaper DAW
+        steamLocation := IniRead(configFile, "AppLocations", "steam", "")                ; NumPad 5 - Steam
+        vscodeLocation := IniRead(configFile, "AppLocations", "vscode", "")              ; NumPad 6 - Visual Studio Code
+        explorerLocation := IniRead(configFile, "AppLocations", "explorer", "")          ; NumPad 7 - File Explorer
+        clipstudiopaintLocation := IniRead(configFile, "AppLocations", "clipstudiopaint", "") ; NumPad 8 - Clip Studio Paint
+        davinciresolveLocation := IniRead(configFile, "AppLocations", "davinciresolve", "")   ; NumPad 9 - DaVinci Resolve
+        obsLocation := IniRead(configFile, "AppLocations", "obs", "")                    ; ./delete - OBS Studio
+        
+        ; Load app identifiers from config
+        discordIdentifier := IniRead(configFile, "AppIdentifiers", "discord", "")
+        obsidianIdentifier := IniRead(configFile, "AppIdentifiers", "obsidian", "")
+        zenIdentifier := IniRead(configFile, "AppIdentifiers", "zen", "")
+        reaperIdentifier := IniRead(configFile, "AppIdentifiers", "reaper", "")
+        steamIdentifier := IniRead(configFile, "AppIdentifiers", "steam", "")
+        vscodeIdentifier := IniRead(configFile, "AppIdentifiers", "vscode", "")
+        explorerIdentifier := IniRead(configFile, "AppIdentifiers", "explorer", "")
+        clipstudiopaintIdentifier := IniRead(configFile, "AppIdentifiers", "clipstudiopaint", "")
+        davinciresolveIdentifier := IniRead(configFile, "AppIdentifiers", "davinciresolve", "")
+        obsIdentifier := IniRead(configFile, "AppIdentifiers", "obs", "")
+        
+        configLoaded := true
     }
-}
-
-; Emergency reload hotkey (Ctrl+Shift+R on main keyboard)
-^+r::Reload
-
-;############### KEY EVENT HANDLER ########################
-KeyEvent(code, state){
-
-    if (state==1) && (code==82) ; NumPad0
+    
+    if (code==82) ; NumPad0
     {
         ; Check if Media Share folder is already open in Explorer
         ; Look for any Explorer window with the Media Share folder path in the address bar
@@ -187,9 +166,8 @@ KeyEvent(code, state){
 				WinActivate(steamIdentifier)
 				; Brief delay to allow window activation
 				Sleep(100)
-				; Reinitialize keyboard subscription after Steam activation
-				; (Steam sometimes interferes with keyboard hooks)
-				ReinitializeKeyboard()
+				; Return true to signal main script to reinitialize keyboard
+				return true
 			} catch Error as e {
 				; If activation fails, continue without breaking the script
 			}
@@ -204,8 +182,8 @@ KeyEvent(code, state){
 					; Activate it once it's open
 					WinActivate(steamIdentifier)
 					Sleep(100)
-					; Reinitialize keyboard subscription after Steam launch
-					ReinitializeKeyboard()
+					; Return true to signal main script to reinitialize keyboard
+					return true
 				}
 			} catch Error as e {
 				; If launch fails, continue without breaking the script
@@ -290,27 +268,7 @@ KeyEvent(code, state){
 	}
 
 
-	if (state==1) && (code==311) ; Printscreen
-	{
-		; Then send the mute toggle shortcut
-		Send("^+|") ; Ctrl+Shift+M to toggle mute
-	
-	
-	}
 
-		if (state==1) && (code==70) ; Scroll Lock
-	{
-	
-		; Then send the deafen toggle shortcut
-		Send("^+>") ; 
-		; Close the overlay by sending the toggle shortcut again
-	}
-
-	if (state==1) && (code==69) ; pause
-	{
-		; Send Ctrl+Alt+Shift+L to disconnect from Discord call
-		Send("^+l") ; Ctrl+Alt+Shift+L combination
-	}
 		if (state==1) && (code==78) ; NumPad Plus (+)
 	{
 		; Take a screenshot using Print Screen
@@ -405,6 +363,7 @@ KeyEvent(code, state){
             Send("facebook.com{Enter}") ; Navigate to facebook
         }
     }
-
+    
+    return false ; No special handling needed
 }
 
