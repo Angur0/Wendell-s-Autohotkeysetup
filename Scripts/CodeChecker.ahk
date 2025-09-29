@@ -28,9 +28,6 @@ SetTimer(() => ToolTip(), -5000)
 ; Emergency reload hotkey (Ctrl+Shift+M on main keyboard - not intercepted)
 ^+m::Reload
 
-; Exit hotkey (Ctrl+Esc on main keyboard - not intercepted)
-^Esc::ExitApp
-
 ; Key event handler - shows all key presses
 KeyEvent(code, state) {
     if (state == 1) {  ; Key down
