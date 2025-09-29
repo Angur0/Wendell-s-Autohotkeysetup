@@ -4,7 +4,7 @@ Persistent
 ; Main control script for managing Numpad and Transport scripts
 ; Uses the same keyboard as defined in the config
 
-#include "A:\autohotkey\AHK v2\Lib\AutoHotInterception.ahk"
+#include "Lib\AutoHotInterception.ahk"
 #include "codetokey.ahk"
 #include "Numpad.ahk"
 #include "Transport.ahk"
