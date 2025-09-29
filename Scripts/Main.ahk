@@ -112,10 +112,9 @@ KeyEvent(code, state) {
         MouseGetPos(&mouseX, &mouseY)
         ToolTip("Function Status:`nNumpad: " . numpadStatus . 
                 "`nTransport: " . transportStatus . 
-                "`nKey Debug: " . debugStatus . 
-                "`nKey pressed: " . CodeToKey(code), mouseX + 10, mouseY + 10)
+                "`nKey Debug: " . debugStatus , mouseX + 10, mouseY + 10) 
         SetTimer(() => ToolTip(), -5000)  ; Hide tooltip after 5 seconds
-        return
+ 
     }
     
     ; Delegate to numpad functions if enabled
