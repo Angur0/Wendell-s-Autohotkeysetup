@@ -123,7 +123,12 @@ The CodeChecker is a built-in debugging tool that helps identify key codes and t
 
 ### How to Use CodeChecker
 
+You can use the CodeChecker in two ways:
+
+#### Option 1: As Part of the Main Script
+
 1. **Enable Debug Mode:**
+   - Run `Main.ahk` as normal
    - Press **F11** on your second keyboard to enable the Key Debug Mode.
    - A tooltip will appear confirming "Key Debug Mode: ON".
 
@@ -140,6 +145,47 @@ The CodeChecker is a built-in debugging tool that helps identify key codes and t
 
 5. **Disable Debug Mode:**
    - Press **F11** again to disable the Key Debug Mode when finished.
+
+#### Option 2: Run CodeChecker By Itself
+
+If you only want to identify key codes without activating other functionality:
+
+1. **Create a Simple CodeChecker Script:**
+   - Create a new file in the Scripts folder called `CodeChecker.ahk` with the following content:
+   ```ahk
+   #SingleInstance force
+   Persistent
+
+   #include "Lib\AutoHotInterception.ahk"
+   #include "codetokey.ahk"
+
+   ; Load configuration
+   configFile := A_ScriptDir . "\config.ini"
+   vendorId := IniRead(configFile, "KeyboardSettings", "vendorId",)
+   productId := IniRead(configFile, "KeyboardSettings", "productId",)
+   vendorIdInt := Integer(vendorId) & 0xFFFF
+   productIdInt := Integer(productId) & 0xFFFF
+
+   ; Initialize AutoHotInterception
+   AHI := AutoHotInterception()
+   keyboardId := AHI.GetKeyboardId(vendorIdInt, productIdInt)
+   AHI.SubscribeKeyboard(keyboardId, true, KeyEvent)
+
+   ; Key event handler - shows all key presses
+   KeyEvent(code, state) {
+       if (state == 1) {  ; Key down
+           MouseGetPos(&mouseX, &mouseY)
+           ToolTip("Key: " . CodeToKey(code) . " (Code: " . code . ")", mouseX + 10, mouseY + 10)
+           SetTimer(() => ToolTip(), -3000)
+       }
+   }
+   ```
+
+2. **Run the CodeChecker:**
+   - Double-click `CodeChecker.ahk` to run only the key code identification tool.
+   - Press any key on your second keyboard to see its name and code.
+   - The tooltip will display for 3 seconds and then disappear.
+   - To exit, right-click the AutoHotkey icon in the system tray and select "Exit".
 
 The CodeChecker makes it easy to configure your keyboard without having to edit code or guess key codes.
 

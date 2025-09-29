@@ -104,6 +104,16 @@ KeyEvent(code, state) {
         return
     }
     
+    ; F11 - Toggle Key Debug Mode
+    else if (CodeToKey(code) == "F11") {
+        debugKeysEnabled := !debugKeysEnabled
+        status := debugKeysEnabled ? "ON" : "OFF"
+        MouseGetPos(&mouseX, &mouseY)
+        ToolTip("Key Debug Mode: " . status, mouseX + 10, mouseY + 10)
+        SetTimer(() => ToolTip(), -2000)
+        return
+    }
+    
     ; F12 - Show status
     else if (CodeToKey(code) == "F12") {
         numpadStatus := numpadEnabled ? "ON" : "OFF"
