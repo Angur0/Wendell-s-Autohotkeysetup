@@ -24,9 +24,10 @@ The scripts are written for **AutoHotkey v2**.
   - `Main.ahk`: The main script that runs the setup.
   - `config.ini`: Configuration file for application paths and keyboard settings.
   - `keyconfig.ini`: Key code mapping configuration. **Edit this file to change key mappings.**
-  - `codetokey.ahk`: Script that handles key code to key name conversion.
-  - `Numpad.ahk`: Script that handles numpad functionality.
-  - `Transport.ahk`: Script that handles transport controls.
+   - `codetokey.ahk`: Script that handles key code to key name conversion.
+   - `FKeys.ahk`: Logic for the F-key row (F1, F2, F11, F12).
+   - `Numpad.ahk`: Script that handles numpad functionality.
+   - `Transport.ahk`: Script that handles transport controls.
   - `keyboardclip.clip`: A file for creating physical stickers for your keyboard keys.
   - `CodeChecker`: A script used to check actual keycodes thrown by the Interception Driver.
 

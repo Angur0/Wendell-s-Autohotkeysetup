@@ -29,8 +29,8 @@ HandleTransportKey(code, state) {
 
     ; Pause/Break -> Send Ctrl+Shift+L (disconnect)
     if (CodeToKey(code) == "Pause") {
-        ; Send Ctrl+Alt+Shift+L to disconnect from Discord call (per base comment)
-        Send("^+l") ; Using the provided base (Ctrl+Shift+L)
+        ; Send Ctrl+Shift+L to disconnect from Discord call
+        Send("^+L") ; Ctrl+Shift+L (uppercase L for Discord)
         return false
     }
 
