@@ -5,10 +5,10 @@ Persistent
 ; Uses the same keyboard as defined in the config
 
 #include "Lib\AutoHotInterception.ahk"
+#include "Lib\InterceptionTapHold.ahk"
 #include "codetokey.ahk"
 #include "Numpad.ahk"
 #include "Transport.ahk"
-
 
 ;############### LOAD CONFIGURATION ########################
 configFile := A_ScriptDir . "\config.ini"
@@ -26,9 +26,15 @@ AHI := AutoHotInterception()
 keyboardId := AHI.GetKeyboardId(vendorIdInt, productIdInt)
 AHI.SubscribeKeyboard(keyboardId, true, KeyEvent)
 
+; Initialize the F12 behavior
+f12Key := 88  ; F12 keycode from keyconfig.ini
+f12Pressed := false
+
 if (keyboardId == 0) {
     MsgBox("Keyboard not found! Check vendor/product IDs")
 }
+
+ITH := InterceptionTapHold(AHI, keyboardId)
 
 ;############### FUNCTION MANAGEMENT ########################
 ; Function states
@@ -60,6 +66,20 @@ ReinitializeKeyboard() {
 ; Emergency reload hotkey for main script (Ctrl+Shift+M on main keyboard - not intercepted)
 ^+m::Reload
 
+;############### F12 HANDLER FUNCTION ########################
+ShowStatusTooltip() {
+    global numpadEnabled, transportEnabled, debugKeysEnabled
+    
+    numpadStatus := numpadEnabled ? "ON" : "OFF"
+    transportStatus := transportEnabled ? "ON" : "OFF"
+    debugStatus := debugKeysEnabled ? "ON" : "OFF"
+    
+    MouseGetPos(&mouseX, &mouseY)
+    ToolTip("Function Status:`nNumpad: " . numpadStatus . 
+           "`nTransport: " . transportStatus . 
+           "`nKey Debug: " . debugStatus, mouseX + 10, mouseY + 10)
+}
+
 ;############### KEY EVENT HANDLER ########################
 KeyEvent(code, state) {
     global numpadEnabled, transportEnabled, debugKeysEnabled
@@ -71,7 +91,25 @@ KeyEvent(code, state) {
         SetTimer(() => ToolTip(), -2000)
     }
     
-    ; Only respond to key press (state == 1)
+    ; Special case for F12 key handling - we need to process both press and release
+    if (CodeToKey(code) == "F12") {
+        static f12PrevState := 0  ; Track previous state to prevent repeat firing
+        
+        if (state == 1 && f12PrevState == 0) {  ; Key down (initial press only)
+            f12Pressed := true
+            f12PrevState := 1
+            ; Show status tooltip immediately when key is initially pressed
+            ShowStatusTooltip()
+        } else if (state == 0 && f12PrevState == 1) {  ; Key up
+            f12Pressed := false
+            f12PrevState := 0
+            ; Hide tooltip when key is released
+            ToolTip()
+        }
+        return
+    }
+    
+    ; For other keys, only respond to key press (state == 1)
     if (state != 1) {
         return
     }
@@ -114,18 +152,7 @@ KeyEvent(code, state) {
         return
     }
     
-    ; F12 - Show status
-    else if (CodeToKey(code) == "F12") {
-        numpadStatus := numpadEnabled ? "ON" : "OFF"
-        transportStatus := transportEnabled ? "ON" : "OFF"
-        debugStatus := debugKeysEnabled ? "ON" : "OFF"
-        MouseGetPos(&mouseX, &mouseY)
-        ToolTip("Function Status:`nNumpad: " . numpadStatus . 
-                "`nTransport: " . transportStatus . 
-                "`nKey Debug: " . debugStatus , mouseX + 10, mouseY + 10) 
-        SetTimer(() => ToolTip(), -5000)  ; Hide tooltip after 5 seconds
- 
-    }
+    ; F12 is handled at the beginning of this function
     
     ; Delegate to numpad functions if enabled
     if (numpadEnabled) {
@@ -147,6 +174,10 @@ OnExit(ExitCleanup)
 
 ExitCleanup(ExitReason, ExitCode) {
     global AHI, keyboardId
+    
+    ; Clear any tooltips
+    ToolTip()
+    
     ; Cleanup keyboard subscription
     try {
         AHI.UnsubscribeKeyboard(keyboardId)
