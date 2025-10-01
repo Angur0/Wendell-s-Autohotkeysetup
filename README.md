@@ -11,6 +11,8 @@ The scripts are written for **AutoHotkey v2**.
 ## Features
 
 - **Second Keyboard Isolation:** Hotkeys are only triggered by a designated second keyboard, leaving your primary keyboard's functionality unchanged.
+- **Activate on Release:** Keys activate their functions when released rather than when pressed, providing more deliberate control and preventing accidental activation.
+- **Rapid-Fire Protection:** Advanced handling of rapid-fire key events from AutoHotInterception to ensure accurate hold duration detection.
 - **Application Launcher:** Quickly launch your favorite applications using the numpad keys.
 - **Window Management:** Switch between running applications with dedicated keys.
 - **Highly Customizable:** Application paths and identifiers are managed through `config.ini`, while key mappings are in `keyconfig.ini`.
@@ -80,16 +82,16 @@ Here are the current keybinds configured in the scripts:
 - **NumPad Enter**: Mouse back button (XButton1)
 - **NumPad Delete**: OBS Studio (launches/activates)
 
-### Discord Controls
-- **Print Screen**: Toggle mute (Ctrl+Shift+M)
-- **Scroll Lock**: Toggle deafen (Ctrl+Shift+D)
-- **Pause**: Disconnect from call (Alt+Shift)
+### Discord Controls (Transport Keys)
+- **Print Screen**: Toggle mute (Ctrl+Shift+L)
+- **Scroll Lock**: Toggle deafen (Ctrl+Shift+>)
+- **Pause**: Disconnect from call (Ctrl+Shift+L)
 
 ### Quick Web Navigation
 - **NumLock**: Open/navigate to YouTube in Zen Browser
 - **NumPad /**: Open/navigate to Facebook in Zen Browser
 
-*Note: All application launchers will switch to the app if it's already running, or launch it if it's not.*
+*Note: All keys now activate when **released** rather than when pressed, providing more deliberate control. All application launchers will switch to the app if it's already running, or launch it if it's not.*
 
 ## Customization
 
@@ -192,8 +194,12 @@ The CodeChecker makes it easy to configure your keyboard without having to edit 
 
 ## Recent Updates
 
+- **Activate on Release**: Keys now activate their functions when released rather than when pressed, providing more deliberate control
+- **Rapid-Fire Protection**: Added logic to handle rapid-fire key events from AutoHotInterception properly
+- **Updated Discord Controls**: Transport keys now use correct Discord keybinds (Ctrl+Shift+L for disconnect)
 - **Modular Structure**: The code is now split into multiple files for better organization
 - **Configuration Files**: Key mappings are now stored in `keyconfig.ini` for easy modification
 - **Improved Error Handling**: Better handling of keyboard detection and reinitializing
 - **Debug Mode**: Added F11 toggle for key debug mode to help with configuration
 - **CodeChecker Tool**: Added built-in tool to identify key codes and test configuration
+- **Consistent Key Detection**: All numpad keys now use CodeToKey() function for consistent key detection
