@@ -5,11 +5,11 @@ Persistent
 ; Uses the same keyboard as defined in the config 
 ; post revert
 
-#include "Modules\Lib\AutoHotInterception.ahk"
-#include "Modules\codetokey.ahk"
-#include "Modules\FKeys.ahk"
-#include "Modules\Numpad.ahk"
-#include "Modules\Transport.ahk"
+#include "Lib\AutoHotInterception.ahk"
+#include "codetokey.ahk"
+#include "FKeys.ahk"
+#include "Numpad.ahk"
+#include "Transport.ahk"
 
 ;############### LOAD CONFIGURATION ########################
 configFile := A_ScriptDir . "\config.ini"
