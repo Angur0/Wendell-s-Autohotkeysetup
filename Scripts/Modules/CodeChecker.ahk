@@ -2,7 +2,7 @@
 Persistent
 
 #include "Lib\AutoHotInterception.ahk"
-#include "codetokey.ahk"
+#include "Codetokey.ahk"
 
 ; Load configuration
 configFile := A_ScriptDir . "\config.ini"
