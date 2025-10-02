@@ -59,6 +59,7 @@ ReinitializeKeyboard() {
 
 ;############### HOTKEYS ########################
 ; Emergency reload hotkey for main script (Ctrl+Shift+M on main keyboard - not intercepted)
+
 ^+m::Reload
 
 ;############### KEY EVENT HANDLER ########################

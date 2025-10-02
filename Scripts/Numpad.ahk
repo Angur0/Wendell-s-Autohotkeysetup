@@ -47,7 +47,7 @@ HandleNumpadKey(code, state) {
         configLoaded := true
     }
     
-    if (code==82) ; NumPad0
+    if (state==1) && (CodeToKey(code) == "NumPad0")
     {
         ; Check if Media Share folder is already open in Explorer
         ; Look for any Explorer window with the Media Share folder path in the address bar
