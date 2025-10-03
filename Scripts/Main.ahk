@@ -7,6 +7,7 @@ Persistent
 
 #include "Lib\AutoHotInterception.ahk"
 #include "codetokey.ahk"
+#include "AutoSetup.ahk"
 #include "FKeys.ahk"
 #include "Numpad.ahk"
 #include "NumberRow.ahk"
@@ -16,6 +17,10 @@ Persistent
 #include "CtrlSpaceRow.ahk"
 #include "TransportKeys.ahk"
 #include "EscKey.ahk"
+
+;############### AUTO-GENERATE MISSING FILES ########################
+; Create necessary files/folders if they don't exist (useful for compiled .exe)
+EnsureRequiredFilesExist()
 
 ;############### LOAD CONFIGURATION ########################
 configFile := A_ScriptDir . "\config.ini"
