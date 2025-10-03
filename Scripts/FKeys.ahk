@@ -35,127 +35,252 @@ FKeys_HandleEvent(code, state) {
 
 FKeys_HandleF1(state) {
     global numpadEnabled
+    static prevState := 0
 
-    if (state != 1)
-        return false
+    if (state == 1 && prevState == 0) {
+        prevState := 1
+        ; Show preview tooltip while holding
+        status := numpadEnabled ? "ON" : "OFF"
+        nextStatus := numpadEnabled ? "OFF" : "ON"
+        ToolTip("Numpad: " . status . " → Will toggle to: " . nextStatus, 10, 10)
+        return true
+    }
 
-    numpadEnabled := !numpadEnabled
-    status := numpadEnabled ? "ON" : "OFF"
-    ToolTip("Numpad Functions: " . status, 10, 10)
-    SetTimer(() => ToolTip(), -2000)
-    return true
+    if (state == 0 && prevState == 1) {
+        prevState := 0
+        ; Actually toggle on release
+        numpadEnabled := !numpadEnabled
+        status := numpadEnabled ? "ON" : "OFF"
+        ToolTip("Numpad Functions: " . status, 10, 10)
+        SetTimer(() => ToolTip(), -2000)
+        return true
+    }
+
+    return false
 }
 
 FKeys_HandleF2(state) {
     global transportKeysEnabled
+    static prevState := 0
 
-    if (state != 1)
-        return false
+    if (state == 1 && prevState == 0) {
+        prevState := 1
+        ; Show preview tooltip while holding
+        status := transportKeysEnabled ? "ON" : "OFF"
+        nextStatus := transportKeysEnabled ? "OFF" : "ON"
+        ToolTip("Transport: " . status . " → Will toggle to: " . nextStatus, 10, 10)
+        return true
+    }
 
-    transportKeysEnabled := !transportKeysEnabled
-    status := transportKeysEnabled ? "ON" : "OFF"
-    ToolTip("Transport Functions: " . status, 10, 10)
-    SetTimer(() => ToolTip(), -2000)
-    return true
+    if (state == 0 && prevState == 1) {
+        prevState := 0
+        ; Actually toggle on release
+        transportKeysEnabled := !transportKeysEnabled
+        status := transportKeysEnabled ? "ON" : "OFF"
+        ToolTip("Transport Functions: " . status, 10, 10)
+        SetTimer(() => ToolTip(), -2000)
+        return true
+    }
+
+    return false
 }
 
 FKeys_HandleF3(state) {
     global numberRowEnabled
+    static prevState := 0
 
-    if (state != 1)
-        return false
+    if (state == 1 && prevState == 0) {
+        prevState := 1
+        ; Show preview tooltip while holding
+        status := numberRowEnabled ? "ON" : "OFF"
+        nextStatus := numberRowEnabled ? "OFF" : "ON"
+        ToolTip("Number Row: " . status . " → Will toggle to: " . nextStatus, 10, 10)
+        return true
+    }
 
-    numberRowEnabled := !numberRowEnabled
-    status := numberRowEnabled ? "ON" : "OFF"
-    ToolTip("Number Row: " . status, 10, 10)
-    SetTimer(() => ToolTip(), -2000)
-    return true
+    if (state == 0 && prevState == 1) {
+        prevState := 0
+        ; Actually toggle on release
+        numberRowEnabled := !numberRowEnabled
+        status := numberRowEnabled ? "ON" : "OFF"
+        ToolTip("Number Row: " . status, 10, 10)
+        SetTimer(() => ToolTip(), -2000)
+        return true
+    }
+
+    return false
 }
 
 FKeys_HandleF4(state) {
     global qwertyRowEnabled
+    static prevState := 0
 
-    if (state != 1)
-        return false
+    if (state == 1 && prevState == 0) {
+        prevState := 1
+        ; Show preview tooltip while holding
+        status := qwertyRowEnabled ? "ON" : "OFF"
+        nextStatus := qwertyRowEnabled ? "OFF" : "ON"
+        ToolTip("QWERTY Row: " . status . " → Will toggle to: " . nextStatus, 10, 10)
+        return true
+    }
 
-    qwertyRowEnabled := !qwertyRowEnabled
-    status := qwertyRowEnabled ? "ON" : "OFF"
-    ToolTip("QWERTY Row: " . status, 10, 10)
-    SetTimer(() => ToolTip(), -2000)
-    return true
+    if (state == 0 && prevState == 1) {
+        prevState := 0
+        ; Actually toggle on release
+        qwertyRowEnabled := !qwertyRowEnabled
+        status := qwertyRowEnabled ? "ON" : "OFF"
+        ToolTip("QWERTY Row: " . status, 10, 10)
+        SetTimer(() => ToolTip(), -2000)
+        return true
+    }
+
+    return false
 }
 
 FKeys_HandleF5(state) {
     global asdfRowEnabled
+    static prevState := 0
 
-    if (state != 1)
-        return false
+    if (state == 1 && prevState == 0) {
+        prevState := 1
+        ; Show preview tooltip while holding
+        status := asdfRowEnabled ? "ON" : "OFF"
+        nextStatus := asdfRowEnabled ? "OFF" : "ON"
+        ToolTip("ASDF Row: " . status . " → Will toggle to: " . nextStatus, 10, 10)
+        return true
+    }
 
-    asdfRowEnabled := !asdfRowEnabled
-    status := asdfRowEnabled ? "ON" : "OFF"
-    ToolTip("ASDF Row: " . status, 10, 10)
-    SetTimer(() => ToolTip(), -2000)
-    return true
+    if (state == 0 && prevState == 1) {
+        prevState := 0
+        ; Actually toggle on release
+        asdfRowEnabled := !asdfRowEnabled
+        status := asdfRowEnabled ? "ON" : "OFF"
+        ToolTip("ASDF Row: " . status, 10, 10)
+        SetTimer(() => ToolTip(), -2000)
+        return true
+    }
+
+    return false
 }
 
 FKeys_HandleF6(state) {
     global zxcvRowEnabled
+    static prevState := 0
 
-    if (state != 1)
-        return false
+    if (state == 1 && prevState == 0) {
+        prevState := 1
+        ; Show preview tooltip while holding
+        status := zxcvRowEnabled ? "ON" : "OFF"
+        nextStatus := zxcvRowEnabled ? "OFF" : "ON"
+        ToolTip("ZXCV Row: " . status . " → Will toggle to: " . nextStatus, 10, 10)
+        return true
+    }
 
-    zxcvRowEnabled := !zxcvRowEnabled
-    status := zxcvRowEnabled ? "ON" : "OFF"
-    ToolTip("ZXCV Row: " . status, 10, 10)
-    SetTimer(() => ToolTip(), -2000)
-    return true
+    if (state == 0 && prevState == 1) {
+        prevState := 0
+        ; Actually toggle on release
+        zxcvRowEnabled := !zxcvRowEnabled
+        status := zxcvRowEnabled ? "ON" : "OFF"
+        ToolTip("ZXCV Row: " . status, 10, 10)
+        SetTimer(() => ToolTip(), -2000)
+        return true
+    }
+
+    return false
 }
 
 FKeys_HandleF7(state) {
     global ctrlSpaceRowEnabled
+    static prevState := 0
 
-    if (state != 1)
-        return false
+    if (state == 1 && prevState == 0) {
+        prevState := 1
+        ; Show preview tooltip while holding
+        status := ctrlSpaceRowEnabled ? "ON" : "OFF"
+        nextStatus := ctrlSpaceRowEnabled ? "OFF" : "ON"
+        ToolTip("Ctrl/Space Row: " . status . " → Will toggle to: " . nextStatus, 10, 10)
+        return true
+    }
 
-    ctrlSpaceRowEnabled := !ctrlSpaceRowEnabled
-    status := ctrlSpaceRowEnabled ? "ON" : "OFF"
-    ToolTip("Ctrl/Space Row: " . status, 10, 10)
-    SetTimer(() => ToolTip(), -2000)
-    return true
+    if (state == 0 && prevState == 1) {
+        prevState := 0
+        ; Actually toggle on release
+        ctrlSpaceRowEnabled := !ctrlSpaceRowEnabled
+        status := ctrlSpaceRowEnabled ? "ON" : "OFF"
+        ToolTip("Ctrl/Space Row: " . status, 10, 10)
+        SetTimer(() => ToolTip(), -2000)
+        return true
+    }
+
+    return false
 }
 
 FKeys_HandleF9(state) {
-    if (state != 1)
-        return false
+    static prevState := 0
 
-    ; F8-F10 available for future use
-    ToolTip("F9: Unassigned", 10, 10)
-    SetTimer(() => ToolTip(), -2000)
-    return true
+    if (state == 1 && prevState == 0) {
+        prevState := 1
+        ; Show tooltip while holding
+        ToolTip("F9: Unassigned", 10, 10)
+        return true
+    }
+
+    if (state == 0 && prevState == 1) {
+        prevState := 0
+        ; Clear tooltip on release
+        ToolTip()
+        return true
+    }
+
+    return false
 }
 
 FKeys_HandleF10(state) {
-    if (state != 1)
-        return false
+    static prevState := 0
 
-    ; F10 available for future use
-    ToolTip("F10: Unassigned", 10, 10)
-    SetTimer(() => ToolTip(), -2000)
-    return true
+    if (state == 1 && prevState == 0) {
+        prevState := 1
+        ; Show tooltip while holding
+        ToolTip("F10: Unassigned", 10, 10)
+        return true
+    }
+
+    if (state == 0 && prevState == 1) {
+        prevState := 0
+        ; Clear tooltip on release
+        ToolTip()
+        return true
+    }
+
+    return false
 }
 
 FKeys_HandleF11(state) {
     global debugKeysEnabled
+    static prevState := 0
 
-    if (state != 1)
-        return false
+    if (state == 1 && prevState == 0) {
+        prevState := 1
+        ; Show preview tooltip while holding
+        status := debugKeysEnabled ? "ON" : "OFF"
+        nextStatus := debugKeysEnabled ? "OFF" : "ON"
+        MouseGetPos(&mouseX, &mouseY)
+        ToolTip("Key Debug: " . status . " → Will toggle to: " . nextStatus, mouseX + 10, mouseY + 10)
+        return true
+    }
 
-    debugKeysEnabled := !debugKeysEnabled
-    status := debugKeysEnabled ? "ON" : "OFF"
-    MouseGetPos(&mouseX, &mouseY)
-    ToolTip("Key Debug Mode: " . status, mouseX + 10, mouseY + 10)
-    SetTimer(() => ToolTip(), -2000)
-    return true
+    if (state == 0 && prevState == 1) {
+        prevState := 0
+        ; Actually toggle on release
+        debugKeysEnabled := !debugKeysEnabled
+        status := debugKeysEnabled ? "ON" : "OFF"
+        MouseGetPos(&mouseX, &mouseY)
+        ToolTip("Key Debug Mode: " . status, mouseX + 10, mouseY + 10)
+        SetTimer(() => ToolTip(), -2000)
+        return true
+    }
+
+    return false
 }
 
 FKeys_HandleF12(state) {
