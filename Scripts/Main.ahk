@@ -9,7 +9,13 @@ Persistent
 #include "codetokey.ahk"
 #include "FKeys.ahk"
 #include "Numpad.ahk"
-#include "Transport.ahk"
+#include "NumberRow.ahk"
+#include "QwertyRow.ahk"
+#include "AsdfRow.ahk"
+#include "ZxcvRow.ahk"
+#include "CtrlSpaceRow.ahk"
+#include "TransportKeys.ahk"
+#include "EscKey.ahk"
 
 ;############### LOAD CONFIGURATION ########################
 configFile := A_ScriptDir . "\config.ini"
@@ -34,7 +40,12 @@ if (keyboardId == 0) {
 ;############### FUNCTION MANAGEMENT ########################
 ; Function states
 numpadEnabled := true
-transportEnabled := true
+transportKeysEnabled := true
+numberRowEnabled := true
+qwertyRowEnabled := true
+asdfRowEnabled := true
+zxcvRowEnabled := true
+ctrlSpaceRowEnabled := true
 debugKeysEnabled := false  ; Debug key names display toggle
 
 ; Function to reinitialize keyboard subscription if it gets disrupted
@@ -64,7 +75,9 @@ ReinitializeKeyboard() {
 
 ;############### KEY EVENT HANDLER ########################
 KeyEvent(code, state) {
-    global numpadEnabled, transportEnabled, debugKeysEnabled
+    global numpadEnabled, transportKeysEnabled, numberRowEnabled
+    global qwertyRowEnabled, asdfRowEnabled, zxcvRowEnabled, ctrlSpaceRowEnabled
+    global debugKeysEnabled
     static heldKeys := Map() ; Track which keys are currently held down
     static keyPressTime := Map() ; Track when keys were first pressed
     
@@ -111,13 +124,51 @@ KeyEvent(code, state) {
             SetTimer(() => ToolTip(), -3000)
         }
         
-        ; ESC - Reload this script (now activates on release)
-        if (CodeToKey(code) == "Esc") {
-            ToolTip("Main Script: RELOADING", 10, 10)
-            SetTimer(() => ToolTip(), -1000)
-            Sleep(1000)
-            Reload
+        ; Escape key always active (cannot be disabled)
+        if (EscKey_HandleEvent(code, 1)) {
             return
+        }
+        
+        ; Delegate to number row handler if enabled (now activates on release)
+        if (numberRowEnabled) {
+            if (NumberRow_HandleEvent(code, 1)) {
+                return
+            }
+        }
+        
+        ; Delegate to qwerty row handler if enabled (now activates on release)
+        if (qwertyRowEnabled) {
+            if (QwertyRow_HandleEvent(code, 1)) {
+                return
+            }
+        }
+        
+        ; Delegate to asdf row handler if enabled (now activates on release)
+        if (asdfRowEnabled) {
+            if (AsdfRow_HandleEvent(code, 1)) {
+                return
+            }
+        }
+        
+        ; Delegate to zxcv row handler if enabled (now activates on release)
+        if (zxcvRowEnabled) {
+            if (ZxcvRow_HandleEvent(code, 1)) {
+                return
+            }
+        }
+        
+        ; Delegate to ctrl/space row handler if enabled (now activates on release)
+        if (ctrlSpaceRowEnabled) {
+            if (CtrlSpaceRow_HandleEvent(code, 1)) {
+                return
+            }
+        }
+        
+        ; Delegate to transport keys handler if enabled (now activates on release)
+        if (transportKeysEnabled) {
+            if (TransportKeys_HandleEvent(code, 1)) {
+                return
+            }
         }
         
         ; Delegate to numpad functions if enabled (now activates on release)
@@ -127,11 +178,6 @@ KeyEvent(code, state) {
                 ; Steam or other app needs keyboard reinitialization
                 ReinitializeKeyboard()
             }
-        }
-        
-        ; Delegate to transport functions if enabled (now activates on release)
-        if (transportEnabled) {
-            HandleTransportKey(code, 1) ; Pass state as 1 since functions expect press event
         }
     }
 }
