@@ -1,4 +1,4 @@
-# Wendell's AutoHotkey Setup
+# W's AutoHotkey Setup
 
 A modular AutoHotkey v2 setup that transforms a second keyboard into a powerful macro and application launcher device using the AutoHotInterception library.
 
