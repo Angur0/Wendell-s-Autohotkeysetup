@@ -133,19 +133,22 @@ If running as a compiled .exe, the script will automatically:
 | **NumLock** | YouTube | Navigate to YouTube in Zen |
 | **/** | Facebook | Navigate to Facebook in Zen |
 
-### Transport Keys (Discord Controls)
-| Key | Function | Shortcut |
-|-----|----------|----------|
-| **PrtSc** | Toggle Mute | Ctrl+Shift+\| |
-| **ScrLk** | Toggle Deafen | Ctrl+Shift+> |
-| **Pause** | Disconnect | Ctrl+Shift+L |
-| **Insert** | Unassigned | - |
-| **Home** | Unassigned | - |
-| **PgUp** | Unassigned | - |
-| **Delete** | Unassigned | - |
-| **End** | Unassigned | - |
-| **PgDn** | Unassigned | - |
-| **Arrow Keys** | Unassigned | - |
+### Transport Keys (Discord & OBS Controls)
+| Key | Function | Shortcut | Description |
+|-----|----------|----------|-------------|
+| **PrtSc** | Toggle Mute (Discord) | Ctrl+Shift+\| | Toggle Discord mute |
+| **ScrLk** | Toggle Deafen (Discord) | Ctrl+Shift+> | Toggle Discord deafen |
+| **Pause** | Disconnect (Discord) | Ctrl+Shift+L | Disconnect from voice |
+| **Insert** | Start/Stop Streaming (OBS) | Ctrl+Shift+F9 | Toggle streaming |
+| **Home** | Start/Stop Recording (OBS) | Ctrl+Shift+F12 | Toggle recording |
+| **PgUp** | Start/Stop Replay Buffer (OBS) | Ctrl+Shift+F10 | Toggle replay buffer |
+| **Delete** | Save Replay Buffer (OBS) | Ctrl+Shift+S | Save replay clip |
+| **End** | Save Replay Buffer (OBS) | Ctrl+Shift+S | Save replay clip |
+| **PgDn** | Mute/Unmute YouTube | k (Chrome) | Chrome YouTube pause/play |
+| **Up Arrow** | Previous Scene (OBS) | Ctrl+Shift+F7 | Switch to previous scene |
+| **Down Arrow** | Next Scene (OBS) | Ctrl+Shift+F8 | Switch to next scene |
+| **Left Arrow** | Mute Desktop Audio (OBS) | Ctrl+Shift+F1 | Toggle desktop audio |
+| **Right Arrow** | Mute Microphone (OBS) | Ctrl+Shift+F2 | Toggle mic/aux audio |
 
 ### Escape Key
 | Key | Function | Toggle |
@@ -157,8 +160,8 @@ If running as a compiled .exe, the script will automatically:
 ## 📊 Binding Statistics
 
 - **Total Keys**: ~97 programmable keys
-- **Bound Keys**: ~25 keys (26%)
-- **Unbound Keys**: ~72 keys (74%)
+- **Bound Keys**: ~42 keys (43%)
+- **Unbound Keys**: ~55 keys (57%)
 
 ### Unbound Rows (Ready for Customization)
 - Number Row: 15 keys
@@ -166,7 +169,12 @@ If running as a compiled .exe, the script will automatically:
 - ASDF Row: 13 keys
 - ZXCV Row: 12 keys
 - Ctrl/Space Row: 8 keys
-- Transport Navigation: 10 keys
+
+### Fully Bound Rows
+- F-Keys: 12 keys (all bound)
+- NumPad: 17 keys (all bound)
+- Transport Keys: 13 keys (all bound)
+- Escape: 1 key (always active)
 
 See `UNBOUND_KEYS.md` for complete list.
 
