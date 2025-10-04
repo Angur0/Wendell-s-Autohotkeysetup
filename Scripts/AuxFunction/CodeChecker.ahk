@@ -1,7 +1,7 @@
 #SingleInstance force
 Persistent
 
-#include "Lib\AutoHotInterception.ahk"
+#include "..\Lib\AutoHotInterception.ahk"
 #include "codetokey.ahk"
 
 ; Load configuration

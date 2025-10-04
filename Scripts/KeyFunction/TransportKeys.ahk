@@ -2,7 +2,7 @@
 
 ; Functions for handling Transport Keys (Arrow Keys section and Print Screen section) behavior
 
-#include "codetokey.ahk"
+#include "..\AuxFunction\codetokey.ahk"
 
 TransportKeys_HandleEvent(code, state) {
     keyName := CodeToKey(code)

@@ -6,17 +6,17 @@ Persistent
 ; post revert
 
 #include "Lib\AutoHotInterception.ahk"
-#include "codetokey.ahk"
-#include "AutoSetup.ahk"
-#include "FKeys.ahk"
-#include "Numpad.ahk"
-#include "NumberRow.ahk"
-#include "QwertyRow.ahk"
-#include "AsdfRow.ahk"
-#include "ZxcvRow.ahk"
-#include "CtrlSpaceRow.ahk"
-#include "TransportKeys.ahk"
-#include "EscKey.ahk"
+#include "AuxFunction\codetokey.ahk"
+#include "AuxFunction\AutoSetup.ahk"
+#include "KeyFunction\FKeys.ahk"
+#include "KeyFunction\Numpad.ahk"
+#include "KeyFunction\NumberRow.ahk"
+#include "KeyFunction\QwertyRow.ahk"
+#include "KeyFunction\AsdfRow.ahk"
+#include "KeyFunction\ZxcvRow.ahk"
+#include "KeyFunction\CtrlSpaceRow.ahk"
+#include "KeyFunction\TransportKeys.ahk"
+#include "KeyFunction\EscKey.ahk"
 
 ;############### AUTO-GENERATE MISSING FILES ########################
 ; Create necessary files/folders if they don't exist (useful for compiled .exe)

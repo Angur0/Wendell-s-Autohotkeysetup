@@ -2,7 +2,7 @@
 
 ; Functions for handling Shift-ZXCV Row behavior
 
-#include "codetokey.ahk"
+#include "..\AuxFunction\codetokey.ahk"
 
 ZxcvRow_HandleEvent(code, state) {
     keyName := CodeToKey(code)

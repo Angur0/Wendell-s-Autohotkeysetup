@@ -1,45 +1,45 @@
 #Requires AutoHotkey v2.0
 
-; Functions for handling Tab-QWERTY Row behavior
+; Functions for handling Caps-ASDF Row behavior
 
-#include "codetokey.ahk"
+#include "..\AuxFunction\codetokey.ahk"
 
-QwertyRow_HandleEvent(code, state) {
+AsdfRow_HandleEvent(code, state) {
     keyName := CodeToKey(code)
 
     switch keyName {
-        case "Tab":
-            return QwertyRow_HandleTab(state)
-        case "Q":
-            return QwertyRow_HandleQ(state)
-        case "W":
-            return QwertyRow_HandleW(state)
-        case "E":
-            return QwertyRow_HandleE(state)
-        case "R":
-            return QwertyRow_HandleR(state)
-        case "T":
-            return QwertyRow_HandleT(state)
-        case "Y":
-            return QwertyRow_HandleY(state)
-        case "U":
-            return QwertyRow_HandleU(state)
-        case "I":
-            return QwertyRow_HandleI(state)
-        case "O":
-            return QwertyRow_HandleO(state)
-        case "P":
-            return QwertyRow_HandleP(state)
-        case "[":
-            return QwertyRow_HandleLeftBracket(state)
-        case "]":
-            return QwertyRow_HandleRightBracket(state)
+        case "CapsLock":
+            return AsdfRow_HandleCapsLock(state)
+        case "A":
+            return AsdfRow_HandleA(state)
+        case "S":
+            return AsdfRow_HandleS(state)
+        case "D":
+            return AsdfRow_HandleD(state)
+        case "F":
+            return AsdfRow_HandleF(state)
+        case "G":
+            return AsdfRow_HandleG(state)
+        case "H":
+            return AsdfRow_HandleH(state)
+        case "J":
+            return AsdfRow_HandleJ(state)
+        case "K":
+            return AsdfRow_HandleK(state)
+        case "L":
+            return AsdfRow_HandleL(state)
+        case ";":
+            return AsdfRow_HandleSemicolon(state)
+        case "'":
+            return AsdfRow_HandleApostrophe(state)
+        case "Enter":
+            return AsdfRow_HandleEnter(state)
         default:
             return false
     }
 }
 
-QwertyRow_HandleTab(state) {
+AsdfRow_HandleCapsLock(state) {
     if (state != 1)
         return false
 
@@ -48,7 +48,7 @@ QwertyRow_HandleTab(state) {
     return true
 }
 
-QwertyRow_HandleQ(state) {
+AsdfRow_HandleA(state) {
     if (state != 1)
         return false
 
@@ -57,7 +57,7 @@ QwertyRow_HandleQ(state) {
     return true
 }
 
-QwertyRow_HandleW(state) {
+AsdfRow_HandleS(state) {
     if (state != 1)
         return false
 
@@ -66,7 +66,7 @@ QwertyRow_HandleW(state) {
     return true
 }
 
-QwertyRow_HandleE(state) {
+AsdfRow_HandleD(state) {
     if (state != 1)
         return false
 
@@ -75,7 +75,7 @@ QwertyRow_HandleE(state) {
     return true
 }
 
-QwertyRow_HandleR(state) {
+AsdfRow_HandleF(state) {
     if (state != 1)
         return false
 
@@ -84,7 +84,7 @@ QwertyRow_HandleR(state) {
     return true
 }
 
-QwertyRow_HandleT(state) {
+AsdfRow_HandleG(state) {
     if (state != 1)
         return false
 
@@ -93,7 +93,7 @@ QwertyRow_HandleT(state) {
     return true
 }
 
-QwertyRow_HandleY(state) {
+AsdfRow_HandleH(state) {
     if (state != 1)
         return false
 
@@ -102,7 +102,7 @@ QwertyRow_HandleY(state) {
     return true
 }
 
-QwertyRow_HandleU(state) {
+AsdfRow_HandleJ(state) {
     if (state != 1)
         return false
 
@@ -111,7 +111,7 @@ QwertyRow_HandleU(state) {
     return true
 }
 
-QwertyRow_HandleI(state) {
+AsdfRow_HandleK(state) {
     if (state != 1)
         return false
 
@@ -120,7 +120,7 @@ QwertyRow_HandleI(state) {
     return true
 }
 
-QwertyRow_HandleO(state) {
+AsdfRow_HandleL(state) {
     if (state != 1)
         return false
 
@@ -129,7 +129,7 @@ QwertyRow_HandleO(state) {
     return true
 }
 
-QwertyRow_HandleP(state) {
+AsdfRow_HandleSemicolon(state) {
     if (state != 1)
         return false
 
@@ -138,7 +138,7 @@ QwertyRow_HandleP(state) {
     return true
 }
 
-QwertyRow_HandleLeftBracket(state) {
+AsdfRow_HandleApostrophe(state) {
     if (state != 1)
         return false
 
@@ -147,7 +147,7 @@ QwertyRow_HandleLeftBracket(state) {
     return true
 }
 
-QwertyRow_HandleRightBracket(state) {
+AsdfRow_HandleEnter(state) {
     if (state != 1)
         return false
 

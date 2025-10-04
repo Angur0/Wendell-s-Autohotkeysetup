@@ -2,7 +2,7 @@
 
 ; Functions for handling Escape key behavior
 
-#include "codetokey.ahk"
+#include "..\AuxFunction\codetokey.ahk"
 
 EscKey_HandleEvent(code, state) {
     keyName := CodeToKey(code)

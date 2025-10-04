@@ -2,7 +2,7 @@
 ; This script provides functions for numpad key handling
 ; Called by Main.ahk - no direct keyboard subscription
 
-#include "codetokey.ahk"
+#include "..\AuxFunction\codetokey.ahk"
 
 ;############### NUMPAD KEY HANDLER ########################
 ; Main function called by Main.ahk for numpad key events

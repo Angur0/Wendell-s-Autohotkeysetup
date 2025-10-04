@@ -2,7 +2,7 @@
 
 ; Functions for handling Ctrl/Spacebar Row behavior
 
-#include "codetokey.ahk"
+#include "..\AuxFunction\codetokey.ahk"
 
 CtrlSpaceRow_HandleEvent(code, state) {
     keyName := CodeToKey(code)

@@ -2,7 +2,7 @@
 
 ; Functions for handling Number Row (1-9, 0, -, =, \, Backspace) behavior
 
-#include "codetokey.ahk"
+#include "..\AuxFunction\codetokey.ahk"
 
 NumberRow_HandleEvent(code, state) {
     keyName := CodeToKey(code)
