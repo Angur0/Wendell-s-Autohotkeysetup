@@ -17,12 +17,13 @@ This setup uses AutoHotInterception to isolate a specific keyboard, allowing you
 
 ## 📁 File Structure
 
-### Core Scripts
-- **`Main.ahk`** - Main control script and key event handler
-- **`AutoSetup.ahk`** - Auto-generates missing config files
-- **`codetokey.ahk`** - Converts key codes to readable names
+### Scripts/
+The main scripts folder contains:
 
-### Row Handlers (All Customizable)
+#### **`Main.ahk`**
+Main control script and key event handler (entry point)
+
+#### **KeyFunction/** (Row Handlers - All Customizable)
 - **`FKeys.ahk`** - F1-F12 toggle controls and debug mode
 - **`NumberRow.ahk`** - Tilde, 1-9, 0, -, =, \, Backspace (15 keys) ⚠️ UNBOUND
 - **`QwertyRow.ahk`** - Tab, Q-P, [, ] (13 keys) ⚠️ UNBOUND
@@ -33,14 +34,22 @@ This setup uses AutoHotInterception to isolate a specific keyboard, allowing you
 - **`EscKey.ahk`** - Escape (reloads script, always active)
 - **`Numpad.ahk`** - NumPad 0-9 + operators (17 keys, all bound)
 
-### Configuration Files
+#### **AuxFunction/** (Auxiliary Scripts)
+- **`AutoSetup.ahk`** - Auto-generates missing config files
+- **`codetokey.ahk`** - Converts key codes to readable names
+- **`Monitor.ahk`** - Debug tool to detect keyboard VID/PID and key presses
+- **`CodeChecker.ahk`** - Utility for testing key codes
+
+#### **Configuration Files**
 - **`config.ini`** - Application paths, window identifiers, keyboard VID/PID
 - **`keyconfig.ini`** - Key code to key name mappings
 
-### Libraries
-- **`Lib/AutoHotInterception.ahk`** - AutoHotInterception library
-- **`Lib/x64/interception.dll`** - Interception driver DLL
-- **`Lib/AutoHotInterception.dll`** - AutoHotInterception DLL
+#### **Lib/** (Libraries)
+- **`AutoHotInterception.ahk`** - AutoHotInterception library
+- **`AutoHotInterception.dll`** - AutoHotInterception DLL
+- **`CLR.ahk`** - Common Language Runtime helper
+- **`x64/interception.dll`** - Interception driver DLL (64-bit)
+- **`x86/interception.dll`** - Interception driver DLL (32-bit)
 
 ## 🚀 Quick Start
 
@@ -59,7 +68,7 @@ This setup uses AutoHotInterception to isolate a specific keyboard, allowing you
    ```
 
 2. **Find Your Keyboard IDs:**
-   - Run `Scripts/Monitor.ahk`
+   - Run `Scripts/AuxFunction/Monitor.ahk`
    - Press keys on your second keyboard
    - Note the **Vendor ID** (VID) and **Product ID** (PID)
    - Example: `VID: 0x03F0, PID: 0x344A`
@@ -165,7 +174,7 @@ See `UNBOUND_KEYS.md` for complete list.
 
 ### Adding Functions to Unbound Keys
 
-1. Open the appropriate row handler file (e.g., `NumberRow.ahk`)
+1. Open the appropriate row handler file in `KeyFunction/` (e.g., `KeyFunction/NumberRow.ahk`)
 2. Find the handler function (e.g., `NumberRow_Handle1(state)`)
 3. Replace `; Add your function here` with your code:
 
@@ -260,8 +269,8 @@ If you prefer command line compilation:
 1. **Include All Files:**
    - Make sure the .exe is in the same folder as:
      - `Lib/` folder (with all DLLs)
-     - All row handler `.ahk` files
-     - `codetokey.ahk`, `AutoSetup.ahk`
+     - `KeyFunction/` folder (with all row handler `.ahk` files)
+     - `AuxFunction/` folder (with `codetokey.ahk`, `AutoSetup.ahk`, etc.)
    
 2. **Auto-Generated Files:**
    - `config.ini` and `keyconfig.ini` will be created automatically on first run
@@ -286,6 +295,11 @@ If you prefer command line compilation:
 - Check if row is enabled (press corresponding F-key)
 - Ensure `keyconfig.ini` has correct mappings
 
+### Debugging with Monitor.ahk
+- Run `Scripts/AuxFunction/Monitor.ahk` to see live key events
+- Press keys on your second keyboard to verify detection
+- Check VID/PID matches your `config.ini` settings
+
 ### Application Won't Launch
 - Verify path in `config.ini` exists
 - Check application identifier in `[AppIdentifiers]`
@@ -298,6 +312,10 @@ If you prefer command line compilation:
 
 ## 🔄 Recent Updates
 
+- ✅ **Reorganized folder structure** - Separated key functions and auxiliary scripts
+  - Created `KeyFunction/` folder for all row handlers
+  - Created `AuxFunction/` folder for utility scripts
+  - Updated all #include paths to reflect new structure
 - ✅ Modular row-based architecture
 - ✅ F-key toggle controls for each row
 - ✅ Auto-setup for compiled .exe
