@@ -33,6 +33,46 @@ productId := IniRead(configFile, "KeyboardSettings", "productId",)
 vendorIdInt := Integer(vendorId) & 0xFFFF
 productIdInt := Integer(productId) & 0xFFFF
 
+; Load all application configurations
+LoadAppConfig()
+
+;############### CONFIG LOADER FUNCTION ########################
+; Function to load all app locations and identifiers from config.ini
+LoadAppConfig() {
+    global configFile
+    global mediashareLocation, obsidianLocation, discordLocation, zenLocation
+    global reaperLocation, steamLocation, vscodeLocation, explorerLocation
+    global clipstudiopaintLocation, davinciresolveLocation, obsLocation
+    global discordIdentifier, obsidianIdentifier, zenIdentifier, reaperIdentifier
+    global steamIdentifier, vscodeIdentifier, explorerIdentifier
+    global clipstudiopaintIdentifier, davinciresolveIdentifier, obsIdentifier
+    
+    ; Load app locations from config - NumPad Key Bindings:
+    mediashareLocation := IniRead(configFile, "AppLocations", "mediashare", "")      ; NumPad 0 - Media Share folder
+    obsidianLocation := IniRead(configFile, "AppLocations", "obsidian", "")          ; NumPad 1 - Obsidian
+    discordLocation := IniRead(configFile, "AppLocations", "discord", "")            ; NumPad 2 - Discord
+    zenLocation := IniRead(configFile, "AppLocations", "zen", "")                    ; NumPad 3 - Zen Browser
+    reaperLocation := IniRead(configFile, "AppLocations", "reaper", "")              ; NumPad 4 - Reaper DAW
+    steamLocation := IniRead(configFile, "AppLocations", "steam", "")                ; NumPad 5 - Steam
+    vscodeLocation := IniRead(configFile, "AppLocations", "vscode", "")              ; NumPad 6 - Visual Studio Code
+    explorerLocation := IniRead(configFile, "AppLocations", "explorer", "")          ; NumPad 7 - File Explorer
+    clipstudiopaintLocation := IniRead(configFile, "AppLocations", "clipstudiopaint", "") ; NumPad 8 - Clip Studio Paint
+    davinciresolveLocation := IniRead(configFile, "AppLocations", "davinciresolve", "")   ; NumPad 9 - DaVinci Resolve
+    obsLocation := IniRead(configFile, "AppLocations", "obs", "")                    ; ./delete - OBS Studio
+    
+    ; Load app identifiers from config
+    discordIdentifier := IniRead(configFile, "AppIdentifiers", "discord", "")
+    obsidianIdentifier := IniRead(configFile, "AppIdentifiers", "obsidian", "")
+    zenIdentifier := IniRead(configFile, "AppIdentifiers", "zen", "")
+    reaperIdentifier := IniRead(configFile, "AppIdentifiers", "reaper", "")
+    steamIdentifier := IniRead(configFile, "AppIdentifiers", "steam", "")
+    vscodeIdentifier := IniRead(configFile, "AppIdentifiers", "vscode", "")
+    explorerIdentifier := IniRead(configFile, "AppIdentifiers", "explorer", "")
+    clipstudiopaintIdentifier := IniRead(configFile, "AppIdentifiers", "clipstudiopaint", "")
+    davinciresolveIdentifier := IniRead(configFile, "AppIdentifiers", "davinciresolve", "")
+    obsIdentifier := IniRead(configFile, "AppIdentifiers", "obs", "")
+}
+
 ;############### INITIALIZE AUTOHOTINTERCEPTION ########################
 AHI := AutoHotInterception()
 keyboardId := AHI.GetKeyboardId(vendorIdInt, productIdInt)
@@ -117,7 +157,7 @@ KeyEvent(code, state) {
         heldKeys.Delete(code)
         keyPressTime.Delete(code)
         
-        ; Remove minimum hold time requirement for now to test
+        ; Remove minimum hold time requirement for now till fixed
         ; if (holdDuration < 50) {
         ;     return
         ; }

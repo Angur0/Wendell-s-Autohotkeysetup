@@ -70,7 +70,8 @@ TransportKeys_HandleInsert(state) {
     if (state != 1)
         return false
 
-    ; Add your function here
+    ; Insert -> Start/Stop Streaming in OBS
+    Send("^+{F9}") ; Ctrl+Shift+F9 (Start/Stop Streaming)
     
     return true
 }
@@ -79,7 +80,8 @@ TransportKeys_HandleHome(state) {
     if (state != 1)
         return false
 
-    ; Add your function here
+    ; Home -> Start/Stop Recording in OBS
+    Send("^+{F12}") ; Ctrl+Shift+F12 (Start/Stop Recording)
     
     return true
 }
@@ -88,7 +90,8 @@ TransportKeys_HandlePageUp(state) {
     if (state != 1)
         return false
 
-    ; Add your function here
+    ; Page Up -> Start/Stop Replay Buffer in OBS
+    Send("^+{F10}") ; Ctrl+Shift+F10 (Start/Stop Replay Buffer)
     
     return true
 }
@@ -97,7 +100,8 @@ TransportKeys_HandleDelete(state) {
     if (state != 1)
         return false
 
-    ; Add your function here
+    ; Delete -> Save Replay Buffer in OBS
+    Send("^+s") ; Ctrl+Shift+S (Save Replay Buffer)
     
     return true
 }
@@ -106,7 +110,8 @@ TransportKeys_HandleEnd(state) {
     if (state != 1)
         return false
 
-    ; Add your function here
+    ; End -> Save Replay Buffer in OBS
+    Send("^+s") ; Ctrl+Shift+S (Save Replay Buffer)
     
     return true
 }
@@ -115,7 +120,21 @@ TransportKeys_HandlePageDown(state) {
     if (state != 1)
         return false
 
-    ; Add your function here
+    ; Page Down -> Mute/Unmute YouTube in Chrome
+    if !WinActive("") {
+        ; Get the control HWND of Chrome
+        try {
+            controlID := ControlGetHwnd("Chrome_RenderWidgetHostHWND1", "Google Chrome")
+            
+            ; Focus on Chrome without breaking focus on what you're doing
+            ControlFocus("Chrome_RenderWidgetHostHWND1", "ahk_id " controlID)
+            
+            Sleep(50)
+            
+            ; Mute YouTube
+            ControlSend("k", "Chrome_RenderWidgetHostHWND1", "Google Chrome")
+        }
+    }
     
     return true
 }
@@ -124,7 +143,8 @@ TransportKeys_HandleUp(state) {
     if (state != 1)
         return false
 
-    ; Add your function here
+    ; Up -> Switch to Previous Scene in OBS
+    Send("^+{F7}") ; Ctrl+Shift+F7 (Previous Scene)
     
     return true
 }
@@ -133,7 +153,8 @@ TransportKeys_HandleDown(state) {
     if (state != 1)
         return false
 
-    ; Add your function here
+    ; Down -> Switch to Next Scene in OBS
+    Send("^+{F8}") ; Ctrl+Shift+F8 (Next Scene)
     
     return true
 }
@@ -142,7 +163,8 @@ TransportKeys_HandleLeft(state) {
     if (state != 1)
         return false
 
-    ; Add your function here
+    ; Left -> Mute/Unmute Desktop Audio in OBS
+    Send("^+{F1}") ; Ctrl+Shift+F1 (custom OBS hotkey for Desktop Audio)
     
     return true
 }
@@ -151,7 +173,8 @@ TransportKeys_HandleRight(state) {
     if (state != 1)
         return false
 
-    ; Add your function here
+    ; Right -> Mute/Unmute Microphone in OBS
+    Send("^+{F2}") ; Ctrl+Shift+F2 (custom OBS hotkey for Mic/Aux)
     
     return true
 }

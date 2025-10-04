@@ -6,46 +6,14 @@
 
 ;############### NUMPAD KEY HANDLER ########################
 ; Main function called by Main.ahk for numpad key events
+; Uses global config variables loaded by Main.ahk's LoadAppConfig() function
 HandleNumpadKey(code, state) {
-    ; Load configuration on first call
-    static configLoaded := false
-    static mediashareLocation, obsidianLocation, discordLocation, zenLocation
-    static reaperLocation, steamLocation, vscodeLocation, explorerLocation
-    static clipstudiopaintLocation, davinciresolveLocation, obsLocation
-    static discordIdentifier, obsidianIdentifier, zenIdentifier, reaperIdentifier
-    static steamIdentifier, vscodeIdentifier, explorerIdentifier
-    static clipstudiopaintIdentifier, davinciresolveIdentifier, obsIdentifier
-    
-    if (!configLoaded) {
-        configFile := A_ScriptDir . "\config.ini"
-        
-        ; Load app locations from config - NumPad Key Bindings:
-        mediashareLocation := IniRead(configFile, "AppLocations", "mediashare", "")      ; NumPad 0 - Media Share folder
-        obsidianLocation := IniRead(configFile, "AppLocations", "obsidian", "")          ; NumPad 1 - Obsidian
-        discordLocation := IniRead(configFile, "AppLocations", "discord", "")            ; NumPad 2 - Discord
-        zenLocation := IniRead(configFile, "AppLocations", "zen", "")                    ; NumPad 3 - Zen Browser
-        reaperLocation := IniRead(configFile, "AppLocations", "reaper", "")              ; NumPad 4 - Reaper DAW
-        steamLocation := IniRead(configFile, "AppLocations", "steam", "")                ; NumPad 5 - Steam
-        vscodeLocation := IniRead(configFile, "AppLocations", "vscode", "")              ; NumPad 6 - Visual Studio Code
-        explorerLocation := IniRead(configFile, "AppLocations", "explorer", "")          ; NumPad 7 - File Explorer
-        clipstudiopaintLocation := IniRead(configFile, "AppLocations", "clipstudiopaint", "") ; NumPad 8 - Clip Studio Paint
-        davinciresolveLocation := IniRead(configFile, "AppLocations", "davinciresolve", "")   ; NumPad 9 - DaVinci Resolve
-        obsLocation := IniRead(configFile, "AppLocations", "obs", "")                    ; ./delete - OBS Studio
-        
-        ; Load app identifiers from config
-        discordIdentifier := IniRead(configFile, "AppIdentifiers", "discord", "")
-        obsidianIdentifier := IniRead(configFile, "AppIdentifiers", "obsidian", "")
-        zenIdentifier := IniRead(configFile, "AppIdentifiers", "zen", "")
-        reaperIdentifier := IniRead(configFile, "AppIdentifiers", "reaper", "")
-        steamIdentifier := IniRead(configFile, "AppIdentifiers", "steam", "")
-        vscodeIdentifier := IniRead(configFile, "AppIdentifiers", "vscode", "")
-        explorerIdentifier := IniRead(configFile, "AppIdentifiers", "explorer", "")
-        clipstudiopaintIdentifier := IniRead(configFile, "AppIdentifiers", "clipstudiopaint", "")
-        davinciresolveIdentifier := IniRead(configFile, "AppIdentifiers", "davinciresolve", "")
-        obsIdentifier := IniRead(configFile, "AppIdentifiers", "obs", "")
-        
-        configLoaded := true
-    }
+    global mediashareLocation, obsidianLocation, discordLocation, zenLocation
+    global reaperLocation, steamLocation, vscodeLocation, explorerLocation
+    global clipstudiopaintLocation, davinciresolveLocation, obsLocation
+    global discordIdentifier, obsidianIdentifier, zenIdentifier, reaperIdentifier
+    global steamIdentifier, vscodeIdentifier, explorerIdentifier
+    global clipstudiopaintIdentifier, davinciresolveIdentifier, obsIdentifier
     
     if (state==1) && (CodeToKey(code) == "NumPad0")
     {
