@@ -40,37 +40,36 @@ LoadAppConfig()
 ; Function to load all app locations and identifiers from config.ini
 LoadAppConfig() {
     global configFile
-    global mediashareLocation, obsidianLocation, discordLocation, zenLocation
-    global reaperLocation, steamLocation, vscodeLocation, explorerLocation
-    global clipstudiopaintLocation, davinciresolveLocation, obsLocation
-    global discordIdentifier, obsidianIdentifier, zenIdentifier, reaperIdentifier
-    global steamIdentifier, vscodeIdentifier, explorerIdentifier
-    global clipstudiopaintIdentifier, davinciresolveIdentifier, obsIdentifier
+    global app1Location, app2Location, app3Location, app4Location, app5Location
+    global app6Location, app7Location, app8Location, app9Location, app10Location, app11Location
+    global app1Identifier, app2Identifier, app3Identifier, app4Identifier, app5Identifier
+    global app6Identifier, app7Identifier, app8Identifier, app9Identifier, app10Identifier, app11Identifier
     
     ; Load app locations from config - NumPad Key Bindings:
-    mediashareLocation := IniRead(configFile, "AppLocations", "mediashare", "")      ; NumPad 0 - Media Share folder
-    obsidianLocation := IniRead(configFile, "AppLocations", "obsidian", "")          ; NumPad 1 - Obsidian
-    discordLocation := IniRead(configFile, "AppLocations", "discord", "")            ; NumPad 2 - Discord
-    zenLocation := IniRead(configFile, "AppLocations", "zen", "")                    ; NumPad 3 - Zen Browser
-    reaperLocation := IniRead(configFile, "AppLocations", "reaper", "")              ; NumPad 4 - Reaper DAW
-    steamLocation := IniRead(configFile, "AppLocations", "steam", "")                ; NumPad 5 - Steam
-    vscodeLocation := IniRead(configFile, "AppLocations", "vscode", "")              ; NumPad 6 - Visual Studio Code
-    explorerLocation := IniRead(configFile, "AppLocations", "explorer", "")          ; NumPad 7 - File Explorer
-    clipstudiopaintLocation := IniRead(configFile, "AppLocations", "clipstudiopaint", "") ; NumPad 8 - Clip Studio Paint
-    davinciresolveLocation := IniRead(configFile, "AppLocations", "davinciresolve", "")   ; NumPad 9 - DaVinci Resolve
-    obsLocation := IniRead(configFile, "AppLocations", "obs", "")                    ; ./delete - OBS Studio
+    app1Location := IniRead(configFile, "AppLocations", "app1", "")      ; NumPad 0
+    app2Location := IniRead(configFile, "AppLocations", "app2", "")      ; NumPad 1
+    app3Location := IniRead(configFile, "AppLocations", "app3", "")      ; NumPad 2
+    app4Location := IniRead(configFile, "AppLocations", "app4", "")      ; NumPad 3
+    app5Location := IniRead(configFile, "AppLocations", "app5", "")      ; NumPad 4
+    app6Location := IniRead(configFile, "AppLocations", "app6", "")      ; NumPad 5
+    app7Location := IniRead(configFile, "AppLocations", "app7", "")      ; NumPad 6
+    app8Location := IniRead(configFile, "AppLocations", "app8", "")      ; NumPad 7
+    app9Location := IniRead(configFile, "AppLocations", "app9", "")      ; NumPad 8
+    app10Location := IniRead(configFile, "AppLocations", "app10", "")    ; NumPad 9
+    app11Location := IniRead(configFile, "AppLocations", "app11", "")    ; ./delete
     
     ; Load app identifiers from config
-    discordIdentifier := IniRead(configFile, "AppIdentifiers", "discord", "")
-    obsidianIdentifier := IniRead(configFile, "AppIdentifiers", "obsidian", "")
-    zenIdentifier := IniRead(configFile, "AppIdentifiers", "zen", "")
-    reaperIdentifier := IniRead(configFile, "AppIdentifiers", "reaper", "")
-    steamIdentifier := IniRead(configFile, "AppIdentifiers", "steam", "")
-    vscodeIdentifier := IniRead(configFile, "AppIdentifiers", "vscode", "")
-    explorerIdentifier := IniRead(configFile, "AppIdentifiers", "explorer", "")
-    clipstudiopaintIdentifier := IniRead(configFile, "AppIdentifiers", "clipstudiopaint", "")
-    davinciresolveIdentifier := IniRead(configFile, "AppIdentifiers", "davinciresolve", "")
-    obsIdentifier := IniRead(configFile, "AppIdentifiers", "obs", "")
+    app1Identifier := IniRead(configFile, "AppIdentifiers", "app1", "")
+    app2Identifier := IniRead(configFile, "AppIdentifiers", "app2", "")
+    app3Identifier := IniRead(configFile, "AppIdentifiers", "app3", "")
+    app4Identifier := IniRead(configFile, "AppIdentifiers", "app4", "")
+    app5Identifier := IniRead(configFile, "AppIdentifiers", "app5", "")
+    app6Identifier := IniRead(configFile, "AppIdentifiers", "app6", "")
+    app7Identifier := IniRead(configFile, "AppIdentifiers", "app7", "")
+    app8Identifier := IniRead(configFile, "AppIdentifiers", "app8", "")
+    app9Identifier := IniRead(configFile, "AppIdentifiers", "app9", "")
+    app10Identifier := IniRead(configFile, "AppIdentifiers", "app10", "")
+    app11Identifier := IniRead(configFile, "AppIdentifiers", "app11", "")
 }
 
 ;############### INITIALIZE AUTOHOTINTERCEPTION ########################
