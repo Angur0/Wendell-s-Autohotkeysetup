@@ -2,6 +2,8 @@
 
 A modular AutoHotkey v2 setup that transforms a second keyboard into a powerful macro and application launcher device using the AutoHotInterception library.
 
+SPOILERS OFC GPT AHHHHH LIBRARY
+
 ## 🎯 Overview
 
 This setup uses AutoHotInterception to isolate a specific keyboard, allowing you to create custom hotkeys that won't interfere with your primary keyboard. Turn any spare USB keyboard into a custom control deck with over 97 programmable keys organized into logical rows.
