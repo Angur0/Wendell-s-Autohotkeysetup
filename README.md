@@ -2,7 +2,7 @@
 
 A modular AutoHotkey v2 setup that transforms a second keyboard into a powerful macro and application launcher device using the AutoHotInterception library.
 
-SPOILERS OFC GPT AHHHHH LIBRARY
+SPOILERS OFC GPT aghhh vibecode
 
 ## 🎯 Overview
 
