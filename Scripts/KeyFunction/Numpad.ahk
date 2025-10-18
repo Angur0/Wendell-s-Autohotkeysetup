@@ -9,9 +9,10 @@
 ; Uses global config variables loaded by Main.ahk's LoadAppConfig() function
 HandleNumpadKey(code, state) {
     global app1Location, app2Location, app3Location, app4Location, app5Location
-    global app6Location, app7Location, app8Location, app9Location, app10Location, app11Location
+    global app6Location, app7Location, app8Location, app9Location, app10Location, app11Location,app12Location
     global app1Identifier, app2Identifier, app3Identifier, app4Identifier, app5Identifier
-    global app6Identifier, app7Identifier, app8Identifier, app9Identifier, app10Identifier, app11Identifier
+    global app6Identifier, app7Identifier, app8Identifier, app9Identifier, app10Identifier, app11Identifier,app12Identifier
+
     
     if (state==1) && (CodeToKey(code) == "NumPad0")
     {
@@ -251,7 +252,20 @@ HandleNumpadKey(code, state) {
 
     if (state==1) && (code==55) ; NumPad Asterisk (*)
     {
-      WinMinimizeAll()
+      
+        if WinExist(app12Identifier) || ProcessExist("MouseWithoutBorders.exe") || ProcessExist("MouseWithoutBordersHelper.exe")
+        {
+            ; Default global exit hotkey: Ctrl+Alt+Shift+Q
+            Send("^!+q")
+            ; Show confirmation tooltip
+            ToolTip("Mouse without Borders closed")
+            SetTimer(() => ToolTip(), -2000) ; Remove tooltip after 2 seconds
+        }
+        else
+        {
+            if (app12Location != "")
+                Run(app12Location)
+        }
     }
 
     if (state==1) && (code==284) ; NumPad Enter

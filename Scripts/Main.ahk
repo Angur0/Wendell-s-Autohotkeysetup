@@ -41,9 +41,10 @@ LoadAppConfig()
 LoadAppConfig() {
     global configFile
     global app1Location, app2Location, app3Location, app4Location, app5Location
-    global app6Location, app7Location, app8Location, app9Location, app10Location, app11Location
+    global app6Location, app7Location, app8Location, app9Location, app10Location, app11Location, app12Location
     global app1Identifier, app2Identifier, app3Identifier, app4Identifier, app5Identifier
-    global app6Identifier, app7Identifier, app8Identifier, app9Identifier, app10Identifier, app11Identifier
+    global app6Identifier, app7Identifier, app8Identifier, app9Identifier, app10Identifier, app11Identifier, app12Identifier
+
     
     ; Load app locations from config - NumPad Key Bindings:
     app1Location := IniRead(configFile, "AppLocations", "app1", "")      ; NumPad 0
@@ -57,7 +58,8 @@ LoadAppConfig() {
     app9Location := IniRead(configFile, "AppLocations", "app9", "")      ; NumPad 8
     app10Location := IniRead(configFile, "AppLocations", "app10", "")    ; NumPad 9
     app11Location := IniRead(configFile, "AppLocations", "app11", "")    ; ./delete
-    
+    app12Location := IniRead(configFile, "AppLocations", "app12", "")    ; Mouse without Borders
+
     ; Load app identifiers from config
     app1Identifier := IniRead(configFile, "AppIdentifiers", "app1", "")
     app2Identifier := IniRead(configFile, "AppIdentifiers", "app2", "")
@@ -70,7 +72,10 @@ LoadAppConfig() {
     app9Identifier := IniRead(configFile, "AppIdentifiers", "app9", "")
     app10Identifier := IniRead(configFile, "AppIdentifiers", "app10", "")
     app11Identifier := IniRead(configFile, "AppIdentifiers", "app11", "")
+    app12Identifier := IniRead(configFile, "AppIdentifiers", "app12", "")
+
 }
+
 
 ;############### INITIALIZE AUTOHOTINTERCEPTION ########################
 AHI := AutoHotInterception()
